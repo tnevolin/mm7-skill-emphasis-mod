@@ -1,0 +1,25 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1076: attempt to index local 'itemShield' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getDefenseInfo'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:2773: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getDefenseInfo':
+	(*temporary) = (table: 0x0511e318)
+
+local variables of 'getDefenseInfo':
+	(*temporary) = nil
+	(*temporary) = 6
+	(*temporary) = (table: 0x0f5a1818)
+	(*temporary) = nil
+	(*temporary) = (table: 0x04f980a8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = 6.6546983866851e-285
+	(*temporary) = 2.7589533722045e-312
+	(*temporary) = "attempt to index local 'itemShield' (a nil value)"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

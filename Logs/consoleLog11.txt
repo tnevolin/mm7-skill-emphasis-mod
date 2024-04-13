@@ -1,0 +1,198 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1403: attempt to index global 'meleeInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x0fe95638)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = (table: 0x0fe957b0)
+	(*temporary) = 6.6038791184416e-286
+	(*temporary) = 8
+	(*temporary) = 8
+	(*temporary) = nil
+	(*temporary) = 5.7333716525284e-313
+	(*temporary) = "attempt to index global 'meleeInfo' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x05025040)
+	newWeaponBaseRecoveryBonuses = (table: 0x05025068)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04e11938)
+	newWeaponSkillRecoveryBonuses = (table: 0x04e11db8)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x0519e958)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x0519e9a8)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0fe41208)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0fe47d40)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0f542658)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0f5488f8)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x04aaa980)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x04ab0a50)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x189c5840)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1737: attempt to call global 'getArmorInfo' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x189cb8f8)
+
+local variables of 'v':
+	(*temporary) = nil
+	(*temporary) = (table: 0x04cf98c8)
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to call global 'getArmorInfo' (a nil value)"
+
+upvalues of 'v':
+	oldArmorSkillResistanceBonuses = (table: 0x048a3e50)
+	newArmorSkillResistanceBonuses = (table: 0x048a3fd0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

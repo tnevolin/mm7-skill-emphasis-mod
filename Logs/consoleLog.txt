@@ -1,0 +1,34 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1995: attempt to index global 't' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1995: in function 'f'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:2252: in function <C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:2251>
+	[C]: in function 'pcall'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/Common.lua:203: in function 'pcall2'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:1789: in function <C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:1786>
+	[C]: in function 'def'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/events.lua:2566: in function 'f'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:2238: in function <C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:2236>
+	[C]: in function 'pcall'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/Common.lua:203: in function 'pcall2'
+	C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:1789: in function <C:\games\m&m\mm7-skill-emphasis-mod\Scripts/Core/RSMem.lua:1786>
+
+arguments of 'f':
+	d = (table: 0x0fa30250)
+	def = (function: 0x051aec40)
+	monsterPointer = 6333300
+	damageKind = 4
+	damage = 39
+
+local variables of 'f':
+	result = 19
+	(*temporary) = (function: 0x051ae440)
+	(*temporary) = (table: 0x04dd2470)
+	(*temporary) = nil
+	(*temporary) = "attempt to index global 't' (a nil value)"
+
+upvalues of 'f':
+	meleeHitPlayer = (table: 0x04dd2470)
+	applySpecialWeaponEffect = (function: 0x051ae440)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

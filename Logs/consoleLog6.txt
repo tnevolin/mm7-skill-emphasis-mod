@@ -1,0 +1,180 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x04814000)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x04814028)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x0f6a4920)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x0f6a51f8)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x05f614f0)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x05f615e0)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x0f662520)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x0f662548)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x04b069c0)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x04b71c18)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1447: attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeRecoveryCorrection'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1710: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeRecoveryCorrection':
+	(*temporary) = (table: 0x0f534ea8)
+
+local variables of 'getMeleeRecoveryCorrection':
+	(*temporary) = 0
+	(*temporary) = (table: 0x0f534ed0)
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = 0
+	(*temporary) = nil
+	(*temporary) = 40
+	(*temporary) = 2
+	(*temporary) = "attempt to perform arithmetic on global 'oldRecoveryBonus1' (a nil value)"
+
+upvalues of 'getMeleeRecoveryCorrection':
+	oldWeaponBaseRecoveryBonuses = (table: 0x047a6280)
+	newWeaponBaseRecoveryBonuses = (table: 0x048e1e90)
+	oldWeaponSkillRecoveryBonuses = (table: 0x04b8d3c8)
+	newWeaponSkillRecoveryBonuses = (table: 0x04b8d668)
+	oldArmsmasterSkillRecoveryBonuses = (table: 0x048c67a0)
+	newArmsmasterSkillRecoveryBonuses = (table: 0x048c67f0)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

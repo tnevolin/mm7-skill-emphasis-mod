@@ -1,0 +1,56 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:887: attempt to index local 'player' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeInfo'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1549: in function 'applySpecialWeaponEffect'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1993: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeInfo':
+	(*temporary) = nil
+
+local variables of 'getMeleeInfo':
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to index local 'player' (a nil value)"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:887: attempt to index local 'player' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'getMeleeInfo'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1549: in function 'applySpecialWeaponEffect'
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1993: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'getMeleeInfo':
+	(*temporary) = nil
+
+local variables of 'getMeleeInfo':
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = nil
+	(*temporary) = "attempt to index local 'player' (a nil value)"
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,74 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1944: attempt to index a nil value
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0f23c6b8)
+
+local variables of 'v':
+	(*temporary) = (table: 0x0f23e600)
+	(*temporary) = (table: 0x0f241610)
+	(*temporary) = nil
+	(*temporary) = 1
+	(*temporary) = "MMExtension"
+	(*temporary) = 0
+	(*temporary) = "attempt to index a nil value"
+
+upvalues of 'v':
+	getRangedInfo = (function: 0x048604e0)
+	oldWeaponSkillAttackBonuses = (table: 0x04b0f7c8)
+	newWeaponSkillAttackBonuses = (table: 0x050d5090)
+	newWeaponSkillDamageBonuses = (table: 0x0500c890)
+	getMeleeInfo = (function: 0x04813378)
+	oldArmsmasterSkillAttackBonuses = (table: 0x050d5510)
+	newArmsmasterSkillAttackBonuses = (table: 0x050d5560)
+	oldWeaponSkillDamageBonuses = (table: 0x050d5b48)
+	twoHandedWeaponDamageBonus = 3
+	oldArmsmasterSkillDamageBonuses = (table: 0x04a3bf20)
+	newArmsmasterSkillDamageBonuses = (table: 0x04a3bf70)
+	oldWeaponSkillACBonuses = (table: 0x04a3bfc0)
+	newWeaponSkillACBonuses = (table: 0x04a3c330)
+	getDefenseInfo = (function: 0x04a57d20)
+	oldArmorSkillACBonuses = (table: 0x04a3c6a0)
+	newArmorSkillACBonuses = (table: 0x04b9e730)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1944: attempt to index a nil value
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x04cb9ce8)
+
+local variables of 'v':
+	(*temporary) = (table: 0x04eef538)
+	(*temporary) = (table: 0x04a52eb8)
+	(*temporary) = nil
+	(*temporary) = 0
+	(*temporary) = "MMExtension"
+	(*temporary) = 0
+	(*temporary) = "attempt to index a nil value"
+
+upvalues of 'v':
+	getRangedInfo = (function: 0x048604e0)
+	oldWeaponSkillAttackBonuses = (table: 0x04b0f7c8)
+	newWeaponSkillAttackBonuses = (table: 0x050d5090)
+	newWeaponSkillDamageBonuses = (table: 0x0500c890)
+	getMeleeInfo = (function: 0x04813378)
+	oldArmsmasterSkillAttackBonuses = (table: 0x050d5510)
+	newArmsmasterSkillAttackBonuses = (table: 0x050d5560)
+	oldWeaponSkillDamageBonuses = (table: 0x050d5b48)
+	twoHandedWeaponDamageBonus = 3
+	oldArmsmasterSkillDamageBonuses = (table: 0x04a3bf20)
+	newArmsmasterSkillDamageBonuses = (table: 0x04a3bf70)
+	oldWeaponSkillACBonuses = (table: 0x04a3bfc0)
+	newWeaponSkillACBonuses = (table: 0x04a3c330)
+	getDefenseInfo = (function: 0x04a57d20)
+	oldArmorSkillACBonuses = (table: 0x04a3c6a0)
+	newArmorSkillACBonuses = (table: 0x04b9e730)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,21 @@
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua:1998: attempt to perform arithmetic on field 'Result' (a nil value)
+
+stack traceback:
+	...m&m\mm7-skill-emphasis-mod\Scripts\General\skill-mod.lua: in function 'v'
+	...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:102: in function <...s\m&m\mm7-skill-emphasis-mod\Scripts/Core/EventsList.lua:97>
+
+arguments of 'v':
+	(*temporary) = (table: 0x0f077dc8)
+	(*temporary) = (table: 0x0f077d68)
+
+local variables of 'v':
+	(*temporary) = 10000
+	(*temporary) = nil
+	(*temporary) = 10000
+	(*temporary) = "attempt to perform arithmetic on field 'Result' (a nil value)"
+
+upvalues of 'v':
+	meleeHitPlayer = (table: 0x0491cf10)
+	applySpecialWeaponEffect = (function: 0x04afd628)
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
