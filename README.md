@@ -1,6 +1,6 @@
 # Might & Magic 7: skill emphasis mod
 
-This is a skill emphasis mod MM7 implementation. See similar [MM6 implementation] (https://github.com/tnevolin/mm6-skill-emphasis-mod) for more info.
+This is a skill emphasis mod MM7 implementation. See similar [MM6 implementation](https://github.com/tnevolin/mm6-skill-emphasis-mod) for more info.
 
 # Goal
 
