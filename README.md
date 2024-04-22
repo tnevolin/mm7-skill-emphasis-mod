@@ -19,7 +19,7 @@ Return RPG element into the game by emphasising skill importance.
 
 These are: attack, recovery, damage, AC. You can check them in game description.
 
-![Axe](https://github.com/tnevolin/mm7-skill-emphasis-mod/blob/main/_images/axe_description.png)
+![Axe](https://github.com/tnevolin/mm7-skill-emphasis-mod/blob/main/_images/mm7_axe_description.png)
 
 All skills provide same bonuses as they do in vanilla. However, these bonuses are available immediately at Normal rank. Rank now controls how fast these bonuses progress with level instead of triggering them. Bonuses increment per level is much higher than in vanilla and varies based on their combat impact.
 
