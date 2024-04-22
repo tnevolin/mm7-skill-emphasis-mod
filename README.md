@@ -11,47 +11,15 @@ Return RPG element into the game by emphasising skill importance.
 * All skills should be somehow useful.
 * All buffs should be somehow useful.
 
-# Recovery
-
-## Recovery caps
-
-Melee recovery cap is reduced to 10. This still seem to be reasonable cap for end game. Yet it is almost never reachable anyway.
-
-I didn't change ranged recovery cap but it seems that is does not exist!
-
-## Computation mechanics
-
-Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become ineffective to develop any further.
-
-This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. See computation example below.
-
-Keep in mind that even though computation mechanics changed the attack rate value is still converted to recovery for the purpose of UI display and in game text/help and combat computations.
-
-## Computation example
-
-### Vanilla
-
-<pre>
-Dagger    =  60 base recovery
-500 speed =  30 recovery bonus
-haste     =  25 recovery bonus
-
-result		=   5 recovery which is actually capped at 30
-</pre>
-
-### This mod
-
-<pre>
-Total recovery bonus from above example: 40 (dagger) + 30 (speed) + 25 (haste) = 95
-Resulting attack rate:                   100 + 95 = 195
-Converting back to recovery:             100 * (100 / 195) = 51, cap is not reached
-</pre>
-
 # Combat skills
 
 ## Weapon skills
 
 ### Standard bonuses
+
+These are: attack, recovery, damage, AC. You can check them in game description.
+
+![Axe](https://github.com/tnevolin/mm7-skill-emphasis-mod/blob/main/_images/axe_description.png)
 
 All skills provide same bonuses as they do in vanilla. However, these bonuses are available immediately at Normal rank. Rank now controls how fast these bonuses progress with level instead of triggering them. Bonuses increment per level is much higher than in vanilla and varies based on their combat impact.
 
@@ -411,3 +379,42 @@ This is a convenience fix. I am tired to reload game hundreds times just to find
 |Chain		|M			|-			|E			|E			|N			|N			|N			|N			|N			|
 |Plate		|G			|-			|-			|M			|N			|N			|N			|N			|N			|
 |Dodging	|-			|G			|M			|N			|N			|N			|N			|N			|N			|
+
+# Mechanics modification
+
+# Recovery
+
+## Recovery caps
+
+Melee recovery cap is reduced to 10. This still seem to be reasonable cap for end game. Yet it is almost never reachable anyway.
+
+I didn't change ranged recovery cap but it seems that is does not exist!
+
+## Computation mechanics
+
+Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become ineffective to develop any further.
+
+This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. See computation example below.
+
+Keep in mind that even though computation mechanics changed the attack rate value is still converted to recovery for the purpose of UI display and in game text/help and combat computations.
+
+## Computation example
+
+### Vanilla
+
+<pre>
+Dagger    =  60 base recovery
+500 speed =  30 recovery bonus
+haste     =  25 recovery bonus
+
+result		=   5 recovery which is actually capped at 30
+</pre>
+
+### This mod
+
+<pre>
+Total recovery bonus from above example: 40 (dagger) + 30 (speed) + 25 (haste) = 95
+Resulting attack rate:                   100 + 95 = 195
+Converting back to recovery:             100 * (100 / 195) = 51, cap is not reached
+</pre>
+
