@@ -101,8 +101,8 @@ local oldWeaponSkillRecoveryBonuses =
 local newWeaponSkillRecoveryBonuses =
 { 
 	[const.Skills.Staff]	= { 2,  4,  6,  8, },
-	[const.Skills.Sword]	= { 6,  7,  7,  8, },
-	[const.Skills.Dagger]	= { 0,  0,  0,  0, },
+	[const.Skills.Sword]	= { 6,  6,  7,  8, },
+	[const.Skills.Dagger]	= { 0,  1,  2,  2, },
 	[const.Skills.Axe]		= { 6,  7,  8,  8, },
 	[const.Skills.Spear]	= { 0,  0,  0,  0, },
 	[const.Skills.Mace]		= { 0,  0,  0,  0, },
@@ -136,12 +136,20 @@ local newWeaponSkillDamageBonuses =
 	[const.Skills.Axe]		= { 2,  3,  4,  4, },
 	[const.Skills.Spear]	= { 3,  4,  4,  4, },
 	[const.Skills.Mace]		= { 3,  4,  4,  4, },
-	[const.Skills.Unarmed]	= { 5,  6,  7,  8, },
+	[const.Skills.Unarmed]	= { 2,  4,  6,  8, },
 	[const.Skills.Bow]		= { 0,  0,  0,  1, },
 	[const.Skills.Blaster]	= { 0,  0,  0,  0, },
 }
 local oldArmsmasterSkillDamageBonuses = { 0,  0,  1,  2, }
 local newArmsmasterSkillDamageBonuses = { 0,  0,  4,  6, }
+
+local twoHandedWeaponDamageBonus = 3
+local identifyMonsterDamageBonusMultiplier = 0.25
+
+-- unarmed and dodging partial effect
+
+local unarmedPartialEffect = 50
+local dodgingPartialEffect = 50
 
 -- weapon skill AC bonuses (by rank)
 
@@ -219,8 +227,6 @@ local newArmorSkillResistanceBonuses =
 	[const.Skills.Plate]	= { 0,  0,  0,  0, },
 }
 
-local twoHandedWeaponDamageBonus = 3
-
 -- special weapon skill chances
 
 local staffEffect = {["base"] = 10, ["multiplier"] =  4, ["magicMultiplier"] = 10, }
@@ -261,19 +267,19 @@ local partyCumulativeSkills =
 	-- skill is computated by GetSkill function
 	["regular"] =
 	{
-		[const.Skills.Alchemy]			= {["type"] = 1, ["fixed"] =  0, },
-		[const.Skills.IdentifyItem]		= {["type"] = 2, ["fixed"] =  0, },
-		[const.Skills.IdentifyMonster]	= {["type"] = 2, ["fixed"] = 10, },
-		[const.Skills.Repair]			= {["type"] = 2, ["fixed"] =  0, },
-		[const.Skills.Stealing]			= {["type"] = 2, ["fixed"] =  0, },
+		[const.Skills.Alchemy]			= {["type"] = 1, },
+		[const.Skills.IdentifyItem]		= {["type"] = 2, },
+		[const.Skills.IdentifyMonster]	= {["type"] = 2, },
+		[const.Skills.Repair]			= {["type"] = 2, },
+		[const.Skills.Stealing]			= {["type"] = 2, },
 	},
 	-- skill effect is computed by dedicated function
 	["custom"] =
 	{
-		[const.Skills.DisarmTraps]		= {["type"] = 3, ["fixed"] =  0, },
-		[const.Skills.Merchant]			= {["type"] = 3, ["fixed"] =  0, },
-		[const.Skills.Perception]		= {["type"] = 3, ["fixed"] =  0, },
-		[const.Skills.Learning]			= {["type"] = 4, ["fixed"] =  0, },
+		[const.Skills.DisarmTraps]		= {["type"] = 3, },
+		[const.Skills.Merchant]			= {["type"] = 3, },
+		[const.Skills.Perception]		= {["type"] = 3, },
+		[const.Skills.Learning]			= {["type"] = 4, },
 	},
 }
 
@@ -283,7 +289,7 @@ local monsterLevelMultiplier = 1
 local monsterAttackMultiplier = 2
 local monsterArmorClassMultiplier = 1
 local monsterDamageMultiplier = 2
-local monsterHitPointsMultiplier = 2
+local monsterHitPointsMultiplier = 3
 local monsterExperienceMultiplier = 1
 
 -- skill descriptions
@@ -373,7 +379,10 @@ local skillDescriptions =
 	[const.Skills.Unarmed] =
 	{
 		["text"] =
-			"",
+			string.format(
+				"\n\nBonus is reduced to %d%% when holding a weapon.",
+				unarmedPartialEffect
+			),
 		["rank"] =
 		{
 			[const.GM] = "Chance to avoid attack entirely.",
@@ -437,7 +446,10 @@ local skillDescriptions =
 	[const.Skills.Dodging] =
 	{
 		["text"] =
-			"",
+			string.format(
+				"\n\nBonus is reduced to %d%% when wearing an armor.",
+				dodgingPartialEffect
+			),
 		["rank"] =
 		{
 			[const.GM] = "May use Dodging in leather armor.",
@@ -510,8 +522,8 @@ local spellPowersByName =
 
 -- prices
 
-local templeHealingPricePerHP = 0.10
-local templeHealingPricePerSP = 0.10
+local templeHealingPricePerHP = 0.15
+local templeHealingPricePerSP = 0.25
 local innRoomPriceMultiplier = 0.25 -- comparing to full temple healing
 local innFoodBaseQuantity = 20
 
@@ -551,13 +563,27 @@ local modifiedBookValues =
 
 -- professions
 
-local professionCosts =
+local hirelingCosts =
 {
-	[const.NPCProfession.ArmsMaster]	= {  300, 2000, },
-	[const.NPCProfession.WeaponsMaster]	= {  400, 3000, },
-	[const.NPCProfession.Squire]		= {  600, 4000, },
-	[const.NPCProfession.Factor]		= {  500,  100, },
-	[const.NPCProfession.Banker]		= { 1000,  200, },
+	-- buff
+	[const.NPCProfession.Chaplain]		=  200,
+	[const.NPCProfession.Piper]			= 1000,
+	-- combat
+	[const.NPCProfession.Monk]			= 1000,
+	[const.NPCProfession.ArmsMaster]	= 2000,
+	[const.NPCProfession.WeaponsMaster]	= 3000,
+	[const.NPCProfession.Squire]		= 4000,
+	-- trading
+	[const.NPCProfession.Duper]			=  400,
+	[const.NPCProfession.Trader]		=  500,
+	[const.NPCProfession.Merchant]		= 1000,
+	-- alchemy
+	[const.NPCProfession.Herbalist]		=  200,
+	[const.NPCProfession.Apothecary]	=  400,
+	-- identify
+	[const.NPCProfession.Hunter]		=  100,
+	[const.NPCProfession.Sage]			=  200,
+	[const.NPCProfession.Scholar]		=  300,
 }
 
 ----------------------------------------------------------------------------------------------------
@@ -1136,224 +1162,6 @@ local function getDefenseInfo(player)
 	
 end
 
--- local function getPlayerEquipmentData(player)
-
-	-- local equipmentData =
-	-- {
-		-- twoHanded = false,
-		-- dualWield = false,
-		-- bow =
-		-- {
-			-- equipped = false,
-			-- item = nil,
-			-- equipStat = nil,
-			-- weapon = false,
-			-- skill = nil,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- main =
-		-- {
-			-- equipped = false,
-			-- item = nil,
-			-- equipStat = nil,
-			-- weapon = false,
-			-- skill = nil,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- extra =
-		-- {
-			-- equipped = false,
-			-- item = nil,
-			-- equipStat = nil,
-			-- weapon = false,
-			-- skill = nil,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- shield =
-		-- {
-			-- equipped = false,
-			-- item = nil,
-			-- skill = nil,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- armor =
-		-- {
-			-- equipped = false,
-			-- item = nil,
-			-- skill = nil,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- unarmed =
-		-- {
-			-- applied = false,
-			-- withStaff = false,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-		-- dodging =
-		-- {
-			-- applied = false,
-			-- withArmor = false,
-			-- rank = 0,
-			-- level = 0,
-		-- },
-	-- }
-	
-	-- -- get ranged weapon data
-	
-	-- if player.ItemBow ~= 0 then
-		-- equipmentData.bow.equipped = true
-		-- equipmentData.bow.item = player.Items[player.ItemBow]
-		-- local itemBowTxt = Game.ItemsTxt[equipmentData.bow.item.Number]
-		-- equipmentData.bow.equipStat = itemBowTxt.EquipStat + 1
-		-- equipmentData.bow.skill = itemBowTxt.Skill
-		-- equipmentData.bow.level, equipmentData.bow.rank = SplitSkill(player:GetSkill(equipmentData.bow.skill))
-		-- equipmentData.bow.weapon = equipmentData.bow.skill >= const.Skills.Staff and equipmentData.bow.skill <= const.Skills.Blaster
-	-- end
-	
-	-- -- get main hand weapon data
-			
-	-- if player.ItemMainHand ~= 0 then
-		
-		-- equipmentData.main.equipped = true
-		
-		-- equipmentData.main.item = player.Items[player.ItemMainHand]
-		-- equipmentData.main.itemTxt = Game.ItemsTxt[equipmentData.main.item.Number]
-		-- equipmentData.main.equipStat = equipmentData.main.itemTxt.EquipStat + 1
-		-- equipmentData.main.skill = equipmentData.main.itemTxt.Skill
-		
-		-- if equipmentData.main.skill >= const.Skills.Staff and equipmentData.main.skill <= const.Skills.Learning then
-			-- equipmentData.main.level, equipmentData.main.rank = SplitSkill(player.Skills[equipmentData.main.skill])
-		-- end
-		
-		-- if equipmentData.main.skill >= const.Skills.Staff and equipmentData.main.skill <= const.Skills.Blaster then
-			-- equipmentData.main.weapon = true
-		-- end
-		
-	-- end
-	
-	-- -- get extra hand item data only if not holding blaster in main hand
-			
-	-- if (player.ItemMainHand == 0 or equipmentData.main.skill ~= const.Skills.Blaster) and player.ItemExtraHand ~= 0 then
-		
-		-- equipmentData.extra.equipped = true
-		
-		-- equipmentData.extra.item = player.Items[player.ItemExtraHand]
-		-- equipmentData.extra.itemTxt = Game.ItemsTxt[equipmentData.extra.item.Number]
-		-- equipmentData.extra.equipStat = equipmentData.extra.itemTxt.EquipStat + 1
-		-- equipmentData.extra.skill = equipmentData.extra.itemTxt.Skill
-		
-		-- if equipmentData.extra.skill >= const.Skills.Staff and equipmentData.extra.skill <= const.Skills.Learning then
-			-- equipmentData.extra.level, equipmentData.extra.rank = SplitSkill(player.Skills[equipmentData.extra.skill])
-		-- end
-		
-		-- if equipmentData.extra.skill >= const.Skills.Staff and equipmentData.extra.skill <= const.Skills.Blaster then
-			-- equipmentData.extra.weapon = true
-		-- end
-		
-		-- -- shield
-		
-		-- if equipmentData.extra.skill == const.Skills.Shield then
-			-- equipmentData.shield.equipped = true
-			-- equipmentData.shield.skill = equipmentData.extra.skill
-			-- equipmentData.shield.level, equipmentData.shield.rank = equipmentData.extra.level, equipmentData.extra.rank
-		-- end
-		
-	-- end
-	
-	-- -- populate other info
-	
-	-- if equipmentData.main.weapon and equipmentData.main.equipStat == const.ItemType.Weapon2H then
-		-- equipmentData.twoHanded = true
-	-- elseif equipmentData.main.skill == const.Skills.Spear and not equipmentData.extra.equipped then
-		-- equipmentData.twoHanded = true
-	-- elseif equipmentData.main.weapon and equipmentData.extra.weapon then
-		-- equipmentData.dualWield = true
-	-- end
-	
-	-- -- get armor data
-	
-	-- if player.ItemArmor ~= 0 then
-		
-		-- equipmentData.armor.equipped = true
-		
-		-- equipmentData.armor.item = player.Items[player.ItemArmor]
-		-- local itemArmorTxt = Game.ItemsTxt[equipmentData.armor.item.Number]
-		-- equipmentData.armor.skill = itemArmorTxt.Skill
-		-- if equipmentData.armor.skill >= const.Skills.Staff and equipmentData.armor.skill <= const.Skills.Learning then
-			-- equipmentData.armor.level, equipmentData.armor.rank = SplitSkill(player.Skills[equipmentData.armor.skill])
-		-- end
-		
-	-- end
-	
-	-- -- unarmed
-	
-	-- equipmentData.unarmed.level, equipmentData.unarmed.rank = SplitSkill(player.Skills[const.Skills.Unarmed])
-	-- if equipmentData.unarmed.level > 0 then
-		-- -- both hands should be empty for unarmed skill to apply
-		-- if not equipmentData.main.equipped and not equipmentData.extr.equipped then
-			-- equipmentData.unarmed.applied = true
-		-- -- GM Staff can use staff with unarmed skill
-		-- elseif  equipmentData.main.skill == const.Skills.Staff and equipmentData.main.rank == const.GM then
-			-- equipmentData.unarmed.applied = true
-			-- equipmentData.unarmed.withStaff = true
-		-- end
-	-- end
-	
-	-- -- dodging
-	
-	-- equipmentData.dodging.level, equipmentData.dodging.rank = SplitSkill(player.Skills[const.Skills.Dodging])
-	-- if equipmentData.dodging.level > 0 then
-		-- -- should not wear armor for dodging skill to apply
-		-- if not equipmentData.armor.equipped then
-			-- equipmentData.dodging.applied = true
-		-- -- GM Dodging can use skill in leather armor
-		-- elseif equipmentData.armor.skill == const.Skills.Leather and equipmentData.dodging.rank == const.GM then
-			-- equipmentData.dodging.applied = true
-			-- equipmentData.dodging.withArmor = true
-		-- end
-	-- end
-	
-	-- -- account for hirelings skill boost
-	
-	-- if Party.HasNPCProfession(const.NPCProfession.ArmsMaster) then
-		-- equipmentData.bow.level = equipmentData.bow.level + 2
-		-- equipmentData.main.level = equipmentData.main.level + 2
-		-- equipmentData.extra.level = equipmentData.extra.level + 2
-	-- end
-	-- if Party.HasNPCProfession(const.NPCProfession.WeaponsMaster) then
-		-- equipmentData.bow.level = equipmentData.bow.level + 3
-		-- equipmentData.main.level = equipmentData.main.level + 3
-		-- equipmentData.extra.level = equipmentData.extra.level + 3
-	-- end
-	-- if Party.HasNPCProfession(const.NPCProfession.Squire) then
-		-- equipmentData.bow.level = equipmentData.bow.level + 2
-		-- equipmentData.main.level = equipmentData.main.level + 2
-		-- equipmentData.extra.level = equipmentData.extra.level + 2
-		-- equipmentData.shield.level = equipmentData.shield.level + 2
-		-- equipmentData.armor.level = equipmentData.armor.level + 2
-	-- end
-	-- if Party.HasNPCProfession(const.NPCProfession.Squire) then
-		-- equipmentData.bow.level = equipmentData.bow.level + 2
-		-- equipmentData.main.level = equipmentData.main.level + 2
-		-- equipmentData.extra.level = equipmentData.extra.level + 2
-		-- equipmentData.shield.level = equipmentData.shield.level + 2
-		-- equipmentData.armor.level = equipmentData.armor.level + 2
-	-- end
-	-- if Party.HasNPCProfession(const.NPCProfession.Monk) then
-		-- equipmentData.unarmed.level = equipmentData.unarmed.level + 2
-		-- equipmentData.dodging.level = equipmentData.dodging.level + 2
-	-- end
-	
-	-- return equipmentData
-	
--- end
-
 -- calculate recovery correction
 
 local function getRangedRecoveryCorrection(ranged)
@@ -1433,7 +1241,7 @@ local function getMeleeRecoveryCorrection(melee)
 	
 	else
 	
-		local oldRecoveryWeapon = oldWeaponBaseRecoveryBonuses[melee.main.skill] >= oldWeaponBaseRecoveryBonuses[melee.extra.skill] and melee.main or melee.extra
+		local oldRecoveryWeapon = oldWeaponBaseRecoveryBonuses[melee.main.skill] <= oldWeaponBaseRecoveryBonuses[melee.extra.skill] and melee.main or melee.extra
 	
 		-- calculate old and new recovery bonuses
 		
@@ -1494,26 +1302,6 @@ local function randomSpellPower(spellPower, level)
 	return r
 end
 
--- calculate distance from party to monster side
-
-local function getDistanceToMonster(monster)
-	return math.sqrt((Party.X - monster.X) * (Party.X - monster.X) + (Party.Y - monster.Y) * (Party.Y - monster.Y)) - monster.BodyRadius
-end
-
--- fast flat distance from party to monster
-
-local function fastDistance(monsterX, monsterY)
-
-	local dx = Party.X - monsterX
-	local dy = Party.Y - monsterY
-
-	local a = math.max(dx, dy)
-	local b = math.min(dx, dy)
-	
-	return a + 11 / 32 * b
-	
-end
-
 -- get party experience level
 
 local function getPartyExperienceLevel()
@@ -1532,16 +1320,6 @@ local function getPartyExperienceLevel()
 
 end
 
-----------------------------------------------------------------------------------------------------
--- modification events
-----------------------------------------------------------------------------------------------------
-
--- statistics effect
-
-function events.GetStatisticEffect(t)
-	t.Result = math.floor(t.Value / 5)
-end
-
 -- special weapon effects
 
 local function applySpecialWeaponEffect(player, monster)
@@ -1558,15 +1336,20 @@ local function applySpecialWeaponEffect(player, monster)
 	if skill == const.Skills.Staff then
 	
 		local effectChance = staffEffect["base"] + staffEffect["multiplier"] * level
-		local magicSkill = const.Skills.Fire + math.random() * 4
-		local magicLevel, magicRank = SplitSkill(player:GetSkill(magicSkill))
 		
-		if magicLevel > 0 then
+		if math.random(1, 100) <= effectChance then
 		
-			local damage = magicLevel * staffEffect["magicMultiplier"]
-			local damageKind = magicSkill - const.Skills.Fire + const.Damage.Fire
-			local takenDamage = monster:CalcTakenDamage(damageKind, damage)
-			extraHarm = extraHarm + takenDamage
+			local magicSkill = const.Skills.Fire + math.random() * 4
+			local magicLevel, magicRank = SplitSkill(player:GetSkill(magicSkill))
+			
+			if magicLevel > 0 then
+			
+				local damage = magicLevel * staffEffect["magicMultiplier"]
+				local damageKind = magicSkill - const.Skills.Fire + const.Damage.Fire
+				local takenDamage = monster:CalcTakenDamage(damageKind, damage)
+				extraHarm = extraHarm + takenDamage
+				
+			end
 			
 		end
 		
@@ -1592,417 +1375,23 @@ local function applySpecialWeaponEffect(player, monster)
 	
 end
 
--- calculate player hit or miss
-
-local meleeHitPlayer = nil
-local function playerCalcHitOrMiss(d, def, playerPointer, monsterPointer, range, bonus)
-
-	local playerIndex, player = GetPlayer(playerPointer)
-	local monsterIndex, monster = GetMonster(monsterPointer)
-	
-	-- monster AC
-	
-	local monsterArmorClass = GetMonsterArmorClass(monster)
-	
-	-- player attack
-	
-	local playerAttackBase
-	
-	if range == 0 then
-		playerAttackBase = player:GetMeleeAttack()
-	else
-		playerAttackBase = player:GetRangedAttack()
-	end
-	
-	-- range penalty
-	
-	local playerAttackPenalty
-	
-	if range == 0 or range == 1 then
-		playerAttackPenalty = 0
-	elseif range == 2 then
-		playerAttackPenalty = monsterArmorClass / 2
-	elseif range == 3 then
-		playerAttackPenalty = monsterArmorClass + 15
-	end
-	
-	local playerAttack = playerAttackBase - playerAttackPenalty
-	
-	-- compute probability
-	
-	local probability = 1 / (1 + 3 ^ (1 - (playerAttack - monsterArmorClass) / 25))
-	
-	-- compute hit
-	
-	local hit
-	
-	if math.random() < probability then
-		hit = 1
-	else
-		hit = 0
-	end
-	
-	meleeHitPlayer = (range == 0 and hit == 1) and player or nil
-	
-	return hit
-	
-	--[=[
-	-- original function
-	
-	return def(player, monster, range, bonus)
-	--]=]
-	
-end
-mem.hookfunction(0x4272AC, 0, 4, playerCalcHitOrMiss)
-
--- calculate monster hit or miss
-
-local function monsterCalcHitOrMiss(d, def, monsterPointer, playerPointer)
-
-	local monsterIndex, monster = GetMonster(monsterPointer)
-	local playerIndex, player = GetPlayer(playerPointer)
-	
-	-- monster attack
-	
-	local monsterAttack = math.floor(GetMonsterAttack(monster) * monsterAttackMultiplier)
-	
-	-- player armor class
-	
-	local playerArmorClass = player:GetArmorClass()
-	
-	-- compute probability
-	
-	local probability = 1 / (1 + 3 ^ (- (monsterAttack - playerArmorClass - 25) / 25))
-	
-	-- compute hit
-	
-	local hit
-	
-	if math.random() < probability then
-		hit = 1
-	else
-		hit = 0
-	end
-	
-	return hit
-	
-end
-mem.hookfunction(0x427464, 0, 2, monsterCalcHitOrMiss)
-
--- correct attack delay
-
-function events.GetAttackDelay(t)
-
-	-- weapon
-	
-	if t.Ranged then
-	
-		local ranged = getRangedInfo(t.Player)
-		
-		t.Result = t.Result + getRangedRecoveryCorrection(ranged)
-		
-	else
-	
-		local melee = getMeleeInfo(t.Player)
-		
-		t.Result = t.Result + getMeleeRecoveryCorrection(melee)
-		
-	end
-	
-	-- turn recovery time into a multiplier rather than divisor
-	
-	local recoveryBonus = 100 - t.Result
-	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
-	
-	t.Result = correctedRecoveryTime
-	
-	-- cap melee recovery
-	
-	if not t.Ranged then
-		t.Result = math.max(Game.MinMeleeRecoveryTime, t.Result)
-	end
-	
-end
-
--- calculate stat bonus by item
-
-function events.CalcStatBonusByItems(t)
-
-	-- elemental resistance bonus from armor
-	
-	if t.Stat >= const.Stats.FireResistance and t.Stat <= const.Stats.EarthResistance then
-	
-		local defense = getDefenseInfo(t.Player)
-		
-		if defense.armor.equipped then
-		
-			t.Result = t.Result - oldArmorSkillResistanceBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
-			t.Result = t.Result + newArmorSkillResistanceBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
-			
-		end
-		
-	end
-	
-end
-
--- calculate stat bonus by skill
-
-function events.CalcStatBonusBySkills(t)
-
-	-- ranged attack
-	
-	if t.Stat == const.Stats.RangedAttack then
-	
-		local ranged = getRangedInfo(t.Player)
-		
-		if ranged.equipped then
-		
-			local oldBonus = oldWeaponSkillAttackBonuses[ranged.skill][ranged.rank] * ranged.level
-			local newBonus = newWeaponSkillAttackBonuses[ranged.skill][ranged.rank] * ranged.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-	-- ranged damage
-	
-	elseif t.Stat == const.Stats.RangedDamageBase then
-	
-		local ranged = getRangedInfo(t.Player)
-		
-		if ranged.equipped then
-		
-			local oldBonus = 0
-			local newBonus = newWeaponSkillDamageBonuses[ranged.skill][ranged.rank] * ranged.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-	-- melee attack
-	
-	elseif t.Stat == const.Stats.MeleeAttack then
-	
-		local melee = getMeleeInfo(t.Player)
-		
-		-- weapon
-		
-		if melee.equipped then
-			
-			-- single wield
-			
-			if not melee.dualWield then
-				
-				local oldBonus = oldWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-				local newBonus = newWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-				
-				t.Result = t.Result - oldBonus + newBonus
-				
-			-- dual wield
-			
-			else
-						
-				local oldBonus = oldWeaponSkillAttackBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
-				local newBonus =
-					newWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-					+
-					newWeaponSkillAttackBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
-			
-				t.Result = t.Result - oldBonus + newBonus
-				
-			end
-			
-		end
-		
-		-- unarmed
-		
-		if melee.unarmed.applied then
-			
-			local oldBonus = oldWeaponSkillAttackBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
-			local newBonus = newWeaponSkillAttackBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-		-- armsmaster
-		
-		if (melee.equipped or melee.unarmed.applied) and melee.armsmaster.applied then
-		
-			local oldBonus = oldArmsmasterSkillAttackBonuses[melee.armsmaster.rank] * melee.armsmaster.level
-			local newBonus = newArmsmasterSkillAttackBonuses[melee.armsmaster.rank] * melee.armsmaster.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-	-- melee damage
-	
-	elseif t.Stat == const.Stats.MeleeDamageBase then
-	
-		local melee = getMeleeInfo(t.Player)
-		
-		-- weapon
-		
-		if melee.equipped then
-			
-			-- single wield
-			
-			if not melee.dualWield then
-				
-				local oldBonus = oldWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-				local newBonus = newWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-				
-				-- two handed weapon bonus
-				
-				if melee.twoHanded and melee.main.skill ~= const.Skills.Staff then
-					t.Result = t.Result + twoHandedWeaponDamageBonus * melee.main.level
-				end
-				
-				t.Result = t.Result - oldBonus + newBonus
-				
-			-- dual wield
-			
-			else
-				
-				local oldBonus = oldWeaponSkillDamageBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
-				local newBonus = 
-					newWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-					+
-					newWeaponSkillDamageBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
-				
-				t.Result = t.Result - oldBonus + newBonus
-				
-			end
-			
-		end
-		
-		-- unarmed
-		
-		if melee.unarmed.applied then
-			
-			local oldBonus = oldWeaponSkillDamageBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
-			local newBonus = oldWeaponSkillDamageBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
-			
-			-- bug: armsmaster does not add damage when barehands
-			
-			if not melee.unarmed.staff then
-				oldBonus = 0
-			end
-			
-			t.Result = t.Result - oldBonus + newBonus
-				
-		end
-		
-		-- armsmaster
-		
-		if (melee.equipped or melee.unarmed.applied) and melee.armsmaster.applied then
-		
-			local oldBonus = oldArmsmasterSkillDamageBonuses[melee.armsmaster.rank] * melee.armsmaster.level
-			local newBonus = newArmsmasterSkillDamageBonuses[melee.armsmaster.rank] * melee.armsmaster.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-	-- armor class
-	
-	elseif t.Stat == const.Stats.ArmorClass then
-	
-		-- melee
-		
-		local melee = getMeleeInfo(t.Player)
-		
-		if melee.equipped then
-
-			local oldBonus = oldWeaponSkillACBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-			local newBonus = newWeaponSkillACBonuses[melee.main.skill][melee.main.rank] * melee.main.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-		-- defense
-		
-		local defense = getDefenseInfo(t.Player)
-		
-		-- shield
-		
-		if defense.shield.equipped then
-		
-			local oldBonus = oldArmorSkillACBonuses[defense.shield.skill][defense.shield.rank] * defense.shield.level
-			local newBonus = newArmorSkillACBonuses[defense.shield.skill][defense.shield.rank] * defense.shield.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-		-- armor
-		
-		if defense.armor.equipped then
-		
-			local oldBonus = olddefense.armorSkillACBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
-			local newBonus = newdefense.armorSkillACBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-		-- dodging
-		
-		if defense.dodging.applied then
-		
-			local oldBonus = oldArmorSkillACBonuses[const.Skills.Dodging][defense.dodging.rank] * defense.dodging.level
-			local newBonus = newArmorSkillACBonuses[const.Skills.Dodging][defense.dodging.rank] * defense.dodging.level
-			
-			t.Result = t.Result - oldBonus + newBonus
-			
-		end
-		
-	end
-	
-end
-
--- spell damage modification
-
-function events.CalcSpellDamage(t)
-
-	local spellPower = spellPowers[t.Spell]
-	
-	if spellPower ~= nil then
-		t.Result = randomSpellPower(spellPower, t.Skill)
-	end
-	
-end
-
--- apply special weapon effect for melee hit
-
-local function firstCalcDamageToMonster(d, def, monsterPointer, damageKind, damage)
-
-	local result = def(monsterPointer, damageKind, damage)
-	
-	local monsterIndex, monster = GetMonster(monsterPointer)
-	
-	if meleeHitPlayer ~= nil then
-		local extraHarm = applySpecialWeaponEffect(meleeHitPlayer, monster)
-		if extraHarm > 0 then
-			result = result + extraHarm
-		end
-	end
-	
-	return result
-	
-end
-mem.hookcall(0x004398CC, 0, 3, firstCalcDamageToMonster)
-
 ----------------------------------------------------------------------------------------------------
 -- game initialization
 ----------------------------------------------------------------------------------------------------
 
 function events.GameInitialized2()
 
+	-- class SPFactor
+	
+	Game.Classes.SPFactor[const.Class.Thief]	= 1
+	Game.Classes.SPStats[const.Class.Thief]		= 1
+	Game.Classes.SPFactor[const.Class.Monk]		= 1
+	Game.Classes.SPStats[const.Class.Monk]		= 2
+	Game.Classes.SPFactor[const.Class.Ranger]	= 1
+	Game.Classes.SPStats[const.Class.Ranger]	= 3
+	
 	-- class skills
-
+	
 	Game.Classes.Skills[const.Class.Knight]			[const.Skills.Shield]			= const.Expert
 	Game.Classes.Skills[const.Class.Cavalier]		[const.Skills.Shield]			= const.Expert
 	Game.Classes.Skills[const.Class.Champion]		[const.Skills.Shield]			= const.Expert
@@ -2019,7 +1408,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Cavalier]		[const.Skills.DisarmTraps]		= const.Master
 	Game.Classes.Skills[const.Class.Champion]		[const.Skills.DisarmTraps]		= const.Master
 	Game.Classes.Skills[const.Class.BlackKnight]	[const.Skills.DisarmTraps]		= const.Master
-
+	
 	Game.Classes.Skills[const.Class.Monk]			[const.Skills.Spirit]			= 0
 	Game.Classes.Skills[const.Class.Initiate]		[const.Skills.Spirit]			= const.Novice
 	Game.Classes.Skills[const.Class.Master]			[const.Skills.Spirit]			= const.Expert
@@ -2052,7 +1441,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Initiate]		[const.Skills.Stealing]			= const.Novice
 	Game.Classes.Skills[const.Class.Master]			[const.Skills.Stealing]			= const.Expert
 	Game.Classes.Skills[const.Class.Ninja]			[const.Skills.Stealing]			= const.Expert
-
+	
 	Game.Classes.Skills[const.Class.Thief]			[const.Skills.Axe]				= const.Expert
 	Game.Classes.Skills[const.Class.Rogue]			[const.Skills.Axe]				= const.Expert
 	Game.Classes.Skills[const.Class.Spy]			[const.Skills.Axe]				= const.Expert
@@ -2077,7 +1466,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Rogue]			[const.Skills.Perception]		= const.Novice
 	Game.Classes.Skills[const.Class.Spy]			[const.Skills.Perception]		= const.Novice
 	Game.Classes.Skills[const.Class.Assassin]		[const.Skills.Perception]		= const.Novice
-
+	
 	Game.Classes.Skills[const.Class.Paladin]		[const.Skills.Shield]			= const.Expert
 	Game.Classes.Skills[const.Class.Crusader]		[const.Skills.Shield]			= const.Expert
 	Game.Classes.Skills[const.Class.Hero]			[const.Skills.Shield]			= const.Expert
@@ -2110,7 +1499,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Crusader]		[const.Skills.IdentifyMonster]	= const.Novice
 	Game.Classes.Skills[const.Class.Hero]			[const.Skills.IdentifyMonster]	= const.Novice
 	Game.Classes.Skills[const.Class.Villain]		[const.Skills.IdentifyMonster]	= const.Novice
-
+	
 	Game.Classes.Skills[const.Class.Archer]			[const.Skills.Axe]				= const.Master
 	Game.Classes.Skills[const.Class.WarriorMage]	[const.Skills.Axe]				= const.Master
 	Game.Classes.Skills[const.Class.MasterArcher]	[const.Skills.Axe]				= const.Master
@@ -2167,7 +1556,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.WarriorMage]	[const.Skills.Learning]			= const.Expert
 	Game.Classes.Skills[const.Class.MasterArcher]	[const.Skills.Learning]			= const.Expert
 	Game.Classes.Skills[const.Class.Sniper]			[const.Skills.Learning]			= const.Expert
-
+	
 	Game.Classes.Skills[const.Class.Ranger]			[const.Skills.Unarmed]			= const.Expert
 	Game.Classes.Skills[const.Class.Hunter]			[const.Skills.Unarmed]			= const.Expert
 	Game.Classes.Skills[const.Class.RangerLord]		[const.Skills.Unarmed]			= const.Expert
@@ -2208,7 +1597,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Hunter]			[const.Skills.Alchemy]			= const.Expert
 	Game.Classes.Skills[const.Class.RangerLord]		[const.Skills.Alchemy]			= const.Expert
 	Game.Classes.Skills[const.Class.BountyHunter]	[const.Skills.Alchemy]			= const.Expert
-
+	
 	Game.Classes.Skills[const.Class.Cleric]			[const.Skills.Shield]			= const.Master
 	Game.Classes.Skills[const.Class.Priest]			[const.Skills.Shield]			= const.Master
 	Game.Classes.Skills[const.Class.PriestLight]	[const.Skills.Shield]			= const.GM
@@ -2225,7 +1614,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Priest]			[const.Skills.Perception]		= const.Novice
 	Game.Classes.Skills[const.Class.PriestLight]	[const.Skills.Perception]		= const.Novice
 	Game.Classes.Skills[const.Class.PriestDark]		[const.Skills.Perception]		= const.Novice
-
+	
 	Game.Classes.Skills[const.Class.Sorcerer]		[const.Skills.Dodging]			= const.Novice
 	Game.Classes.Skills[const.Class.Wizard]			[const.Skills.Dodging]			= const.Novice
 	Game.Classes.Skills[const.Class.ArchMage]		[const.Skills.Dodging]			= const.Novice
@@ -2250,7 +1639,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.Wizard]			[const.Skills.Stealing]			= const.Novice
 	Game.Classes.Skills[const.Class.ArchMage]		[const.Skills.Stealing]			= const.Novice
 	Game.Classes.Skills[const.Class.Lich]			[const.Skills.Stealing]			= const.Novice
-
+	
 	Game.Classes.Skills[const.Class.Druid]			[const.Skills.Water]			= const.Expert
 	Game.Classes.Skills[const.Class.GreatDruid]		[const.Skills.Water]			= const.Master
 	Game.Classes.Skills[const.Class.ArchDruid]		[const.Skills.Water]			= const.GM
@@ -2287,7 +1676,7 @@ function events.GameInitialized2()
 	Game.Classes.Skills[const.Class.GreatDruid]		[const.Skills.Stealing]			= const.Novice
 	Game.Classes.Skills[const.Class.ArchDruid]		[const.Skills.Stealing]			= const.Novice
 	Game.Classes.Skills[const.Class.Warlock]		[const.Skills.Stealing]			= const.Novice
-
+	
 	-- populate spellPowers
 	
 	local spellTxtIds = {}
@@ -2512,18 +1901,85 @@ function events.GameInitialized2()
 	
 	-- professions
 	
-	for professionIndex, cost in pairs(professionCosts) do
+	for professionIndex, cost in pairs(hirelingCosts) do
 		local professionTxt = Game.NPCProfTxt[professionIndex]
-		professionTxt.Cost = cost[2]
-		professionTxt.JoinText = professionTxt.JoinText:gsub(cost[1], cost[2])
+		professionTxt.JoinText = professionTxt.JoinText:gsub(professionTxt.Cost, cost)
+		professionTxt.Cost = cost
 	end
 	
 	-- shorten skill names
 	
 	Game.SkillNames[const.Skills.IdentifyItem] = "ID Item"
 	Game.SkillNames[const.Skills.IdentifyMonster] = "ID Monster"
+	Game.SkillNames[const.Skills.Bodybuilding] = "Bodybuilding"
+	
+	-- lock strength
+	-- trap strength
+	
+	for mapStatItemIndex = 0, Game.MapStats.high do
+		local mapStatItem = Game.MapStats[mapStatItemIndex]
+		mapStatItem.Lock = math.floor(mapStatItem.Lock * 1.5)
+		mapStatItem.Trap = mapStatItem.Trap * 5
+	end
 	
 end
+
+----------------------------------------------------------------------------------------------------
+-- map load
+----------------------------------------------------------------------------------------------------
+
+function events.LoadMap()
+
+	-- monster statistics
+	
+	for monsterIndex = 1, Map.Monsters.high do
+	
+		local monster = Map.Monsters[monsterIndex]
+		local monsterTxt = Game.MonstersTxt[monster.Id]
+		
+		-- monster level
+		
+		monster.Level = monsterTxt.Level
+		
+		-- monster armor class
+		
+		monster.ArmorClass = monsterTxt.ArmorClass
+		
+		-- monster damage
+		
+		monster.Attack1.DamageDiceCount = monsterTxt.Attack1.DamageDiceCount
+		monster.Attack1.DamageAdd = monsterTxt.Attack1.DamageAdd
+		
+		monster.Attack2.DamageDiceCount = monsterTxt.Attack2.DamageDiceCount
+		monster.Attack2.DamageAdd = monsterTxt.Attack2.DamageAdd
+		
+		monster.SpellSkill = monsterTxt.SpellSkill
+		
+		-- monster hit points
+		
+		monster.FullHitPoints = monsterTxt.FullHitPoints
+		
+		-- monster experience
+		
+		monster.Experience = monsterTxt.Experience
+		
+		-- monster resistance
+
+		for damageType = const.Damage.Phys, const.Damage.Dark do
+			monster.Resistances[damageType] = monsterTxt.Resistances[damageType]
+		end
+		
+		-- increase monster move speed
+		
+		monster.MoveSpeed = monsterTxt.MoveSpeed
+		
+	end
+	
+end
+
+----------------------------------------------------------------------------------------------------
+-- modifications
+----------------------------------------------------------------------------------------------------
 
 -- navigate missile
 
@@ -2615,6 +2071,7 @@ end
 
 -- game tick
 
+playerHitPoints = {}
 function events.Tick()
 
 	-- navigate missiles
@@ -2631,6 +2088,485 @@ function events.Tick()
 	end
 	
 end
+
+-- statistics effect
+
+function events.GetStatisticEffect(t)
+	t.Result = math.floor(t.Value / 5)
+end
+
+-- calculate player hit or miss
+
+local attackingPlayer = nil
+local meleeHitPlayer = nil
+local function playerCalcHitOrMiss(d, def, playerPointer, monsterPointer, range, bonus)
+
+	local playerIndex, player = GetPlayer(playerPointer)
+	local monsterIndex, monster = GetMonster(monsterPointer)
+	
+	-- monster AC
+	
+	local monsterArmorClass = GetMonsterArmorClass(monster)
+	
+	-- player attack
+	
+	local playerAttackBase
+	
+	if range == 0 then
+		playerAttackBase = player:GetMeleeAttack()
+	else
+		playerAttackBase = player:GetRangedAttack()
+	end
+	
+	-- range penalty
+	
+	local playerAttackPenalty
+	
+	if range == 0 or range == 1 then
+		playerAttackPenalty = 0
+	elseif range == 2 then
+		playerAttackPenalty = monsterArmorClass / 2
+	elseif range == 3 then
+		playerAttackPenalty = monsterArmorClass + 15
+	end
+	
+	local playerAttack = playerAttackBase - playerAttackPenalty
+	
+	-- compute probability
+	
+	local probability = 1 / (1 + 3 ^ (1 - (playerAttack - monsterArmorClass) / 25))
+	
+	-- compute hit
+	
+	local hit
+	
+	if math.random() < probability then
+		hit = 1
+	else
+		hit = 0
+	end
+	
+	meleeHitPlayer = (range == 0 and hit == 1) and player or nil
+	
+	return hit
+	
+	--[=[
+	-- original function
+	
+	return def(player, monster, range, bonus)
+	--]=]
+	
+end
+mem.hookfunction(0x4272AC, 0, 4, playerCalcHitOrMiss)
+
+-- calculate monster hit or miss
+
+local function monsterCalcHitOrMiss(d, def, monsterPointer, playerPointer)
+
+	local monsterIndex, monster = GetMonster(monsterPointer)
+	local playerIndex, player = GetPlayer(playerPointer)
+	
+	-- monster attack
+	
+	local monsterAttack = math.floor(GetMonsterAttack(monster) * monsterAttackMultiplier)
+	
+	-- player armor class
+	
+	local playerArmorClass = player:GetArmorClass()
+	
+	-- compute probability
+	
+	local probability = 1 / (1 + 3 ^ (- (monsterAttack - playerArmorClass - 25) / 25))
+	
+	-- compute hit
+	
+	local hit
+	
+	if math.random() < probability then
+		hit = 1
+	else
+		hit = 0
+	end
+	
+	return hit
+	
+end
+mem.hookfunction(0x427464, 0, 2, monsterCalcHitOrMiss)
+
+-- main damage monster from party
+
+local function firstCalcDamageToMonster(d, def, monsterPointer, damageKind, damage)
+
+	local monsterIndex, monster = GetMonster(monsterPointer)
+	
+	-- compute damage
+	
+	local result = def(monsterPointer, damageKind, damage)
+	
+	-- special weapon effects
+	
+	if meleeHitPlayer ~= nil then
+		local extraHarm = applySpecialWeaponEffect(meleeHitPlayer, monster)
+		if extraHarm > 0 then
+			result = result + extraHarm
+		end
+	end
+	
+	return result
+	
+end
+mem.hookcall(0x004398CC, 0, 3, firstCalcDamageToMonster)
+
+-- correct attack delay
+
+function events.GetAttackDelay(t)
+
+	-- weapon
+	
+	if t.Ranged then
+	
+		local ranged = getRangedInfo(t.Player)
+		
+		t.Result = t.Result + getRangedRecoveryCorrection(ranged)
+		
+	else
+	
+		local melee = getMeleeInfo(t.Player)
+		
+		t.Result = t.Result + getMeleeRecoveryCorrection(melee)
+		
+	end
+	
+	-- turn recovery time into a multiplier rather than divisor
+	
+	local recoveryBonus = 100 - t.Result
+	local correctedRecoveryTime = math.floor(100 / (1 + recoveryBonus / 100))
+	
+	t.Result = correctedRecoveryTime
+	
+	-- cap melee recovery
+	
+	if not t.Ranged then
+		t.Result = math.max(Game.MinMeleeRecoveryTime, t.Result)
+	end
+	
+end
+
+-- calculate stat bonus by item
+
+function events.CalcStatBonusByItems(t)
+
+	-- elemental resistance bonus from armor
+	
+	if t.Stat >= const.Stats.FireResistance and t.Stat <= const.Stats.EarthResistance then
+	
+		local defense = getDefenseInfo(t.Player)
+		
+		if defense.armor.equipped then
+		
+			t.Result = t.Result - oldArmorSkillResistanceBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
+			t.Result = t.Result + newArmorSkillResistanceBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
+			
+		end
+		
+	end
+	
+end
+
+-- calculate stat bonus by skill
+
+function events.CalcStatBonusBySkills(t)
+
+	-- ranged attack
+	
+	if t.Stat == const.Stats.RangedAttack then
+	
+		local ranged = getRangedInfo(t.Player)
+		
+		if ranged.equipped then
+		
+			-- weapon
+			
+			local oldBonus = oldWeaponSkillAttackBonuses[ranged.skill][ranged.rank] * ranged.level
+			local newBonus = newWeaponSkillAttackBonuses[ranged.skill][ranged.rank] * ranged.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+	-- ranged damage
+	
+	elseif t.Stat == const.Stats.RangedDamageBase then
+	
+		local ranged = getRangedInfo(t.Player)
+		
+		if ranged.equipped then
+		
+			-- weapon
+			
+			local oldBonus = 0
+			local newBonus = newWeaponSkillDamageBonuses[ranged.skill][ranged.rank] * ranged.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- identify monster effect
+		
+		local identifyMonsterLevel, identifyMonsterRank = SplitSkill(Party.PlayersArray[0]:GetSkill(const.Skills.IdentifyMonster))
+		
+		if identifyMonsterLevel > 0 then
+			local identifyMonsterEffect = 10 + skillEffectRankMultipliers[identifyMonsterRank] * identifyMonsterLevel
+			local identifyMonsterDamageBonus = math.floor(identifyMonsterDamageBonusMultiplier * identifyMonsterEffect)
+			t.Result = t.Result + identifyMonsterDamageBonus
+		end
+		
+	-- melee attack
+	
+	elseif t.Stat == const.Stats.MeleeAttack then
+	
+		local melee = getMeleeInfo(t.Player)
+		
+		-- weapon
+		
+		if melee.equipped then
+			
+			-- single wield
+			
+			if not melee.dualWield then
+				
+				local oldBonus = oldWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+				local newBonus = newWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+				
+				t.Result = t.Result - oldBonus + newBonus
+				
+			-- dual wield
+			
+			else
+						
+				local oldBonus = oldWeaponSkillAttackBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
+				local newBonus =
+					newWeaponSkillAttackBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+					+
+					newWeaponSkillAttackBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
+			
+				t.Result = t.Result - oldBonus + newBonus
+				
+			end
+			
+		end
+		
+		-- unarmed
+		
+		if melee.unarmed.applied then
+			
+			local oldBonus = oldWeaponSkillAttackBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
+			local newBonus = newWeaponSkillAttackBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		elseif melee.unarmed.level > 0 then
+		
+			-- unarmed adds part of it bonus when not applied
+			
+			local oldBonus = 0
+			local newBonus = math.floor(newWeaponSkillAttackBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level * unarmedPartialEffect / 100)
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- armsmaster
+		
+		if (melee.equipped or melee.unarmed.applied) and melee.armsmaster.applied then
+		
+			local oldBonus = oldArmsmasterSkillAttackBonuses[melee.armsmaster.rank] * melee.armsmaster.level
+			local newBonus = newArmsmasterSkillAttackBonuses[melee.armsmaster.rank] * melee.armsmaster.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+	-- melee damage
+	
+	elseif t.Stat == const.Stats.MeleeDamageBase then
+	
+		local melee = getMeleeInfo(t.Player)
+		
+		-- weapon
+		
+		if melee.equipped then
+			
+			-- single wield
+			
+			if not melee.dualWield then
+				
+				local oldBonus = oldWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+				local newBonus = newWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+				
+				-- two handed weapon bonus
+				
+				if melee.twoHanded and melee.main.skill ~= const.Skills.Staff then
+					t.Result = t.Result + twoHandedWeaponDamageBonus * melee.main.level
+				end
+				
+				t.Result = t.Result - oldBonus + newBonus
+				
+			-- dual wield
+			
+			else
+				
+				local oldBonus = oldWeaponSkillDamageBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
+				local newBonus = 
+					newWeaponSkillDamageBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+					+
+					newWeaponSkillDamageBonuses[melee.extra.skill][melee.extra.rank] * melee.extra.level
+				
+				t.Result = t.Result - oldBonus + newBonus
+				
+			end
+			
+		end
+		
+		-- unarmed
+		
+		if melee.unarmed.applied then
+			
+			local oldBonus = oldWeaponSkillDamageBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
+			local newBonus = oldWeaponSkillDamageBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level
+			
+			-- bug: armsmaster does not add damage when barehands
+			
+			if not melee.unarmed.staff then
+				oldBonus = 0
+			end
+			
+			t.Result = t.Result - oldBonus + newBonus
+				
+		elseif melee.unarmed.level > 0 then
+		
+			-- unarmed adds part of it bonus when not applied
+			
+			local oldBonus = 0
+			local newBonus = math.floor(newWeaponSkillDamageBonuses[const.Skills.Unarmed][melee.unarmed.rank] * melee.unarmed.level * unarmedPartialEffect / 100)
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- armsmaster
+		
+		if (melee.equipped or melee.unarmed.applied) and melee.armsmaster.applied then
+		
+			local oldBonus = oldArmsmasterSkillDamageBonuses[melee.armsmaster.rank] * melee.armsmaster.level
+			local newBonus = newArmsmasterSkillDamageBonuses[melee.armsmaster.rank] * melee.armsmaster.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- identify monster effect
+		
+		local identifyMonsterLevel, identifyMonsterRank = SplitSkill(Party.PlayersArray[0]:GetSkill(const.Skills.IdentifyMonster))
+		
+		if identifyMonsterLevel > 0 then
+			local identifyMonsterEffect = skillEffectRankMultipliers[identifyMonsterRank] * identifyMonsterLevel
+			local identifyMonsterDamageBonus = math.floor(identifyMonsterDamageBonusMultiplier * identifyMonsterEffect)
+			t.Result = t.Result + identifyMonsterDamageBonus
+		end
+		
+	-- armor class
+	
+	elseif t.Stat == const.Stats.ArmorClass then
+	
+		-- melee
+		
+		local melee = getMeleeInfo(t.Player)
+		
+		if melee.equipped then
+
+			local oldBonus = oldWeaponSkillACBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+			local newBonus = newWeaponSkillACBonuses[melee.main.skill][melee.main.rank] * melee.main.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- defense
+		
+		local defense = getDefenseInfo(t.Player)
+		
+		-- shield
+		
+		if defense.shield.equipped then
+		
+			local oldBonus = oldArmorSkillACBonuses[defense.shield.skill][defense.shield.rank] * defense.shield.level
+			local newBonus = newArmorSkillACBonuses[defense.shield.skill][defense.shield.rank] * defense.shield.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- armor
+		
+		if defense.armor.equipped then
+		
+			local oldBonus = olddefense.armorSkillACBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
+			local newBonus = newdefense.armorSkillACBonuses[defense.armor.skill][defense.armor.rank] * defense.armor.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+		-- dodging
+		
+		if defense.dodging.applied then
+		
+			local oldBonus = oldArmorSkillACBonuses[const.Skills.Dodging][defense.dodging.rank] * defense.dodging.level
+			local newBonus = newArmorSkillACBonuses[const.Skills.Dodging][defense.dodging.rank] * defense.dodging.level
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		elseif defense.dodging.level > 0 then
+		
+			-- dodging adds part of it bonus when not applied
+			
+			local oldBonus = 0
+			local newBonus = math.floor(newArmorSkillACBonuses[const.Skills.Dodging][defense.dodging.rank] * defense.dodging.level * dodgingPartialEffect)
+			
+			t.Result = t.Result - oldBonus + newBonus
+			
+		end
+		
+	end
+	
+end
+
+-- spell damage modification
+
+function events.CalcSpellDamage(t)
+
+	local spellPower = spellPowers[t.Spell]
+	
+	if spellPower ~= nil then
+		t.Result = randomSpellPower(spellPower, t.Skill)
+	end
+	
+end
+
+-- stealing increases received gold
+
+local function AddGold(d, def, value, kind)
+	if kind == 0 then
+		local stealingLevel, stealingRank = SplitSkill(Party.PlayersArray[0]:GetSkill(const.Skills.Stealing))
+		if stealingLevel > 0 then
+			local stealingEffect = skillEffectRankMultipliers[stealingRank] * stealingLevel
+			value = value + stealingEffect
+		end
+	end
+	def(value, kind)
+end
+mem.hookfunction(0x00420BAE, 2, 0, AddGold)
 
 -- summon hirelings
 
@@ -2669,23 +2605,56 @@ end
 function events.KeyDown(t)
 	-- Hirelings
 	if t.Alt then
-		if t.Key == const.Keys["1"] then
-			bringHirelingsToParty({const.NPCProfession.WeaponsMaster, const.NPCProfession.Squire, })
-		elseif t.Key == const.Keys["2"] then
-			bringHirelingsToParty({const.NPCProfession.SpellMaster, const.NPCProfession.Mystic, })
-		elseif t.Key == const.Keys["3"] then
+	
+		local handled = true
+		
+		-- buffs
+		if		t.Key == const.Keys.B then
+			bringHirelingsToParty({const.NPCProfession.Chaplain, const.NPCProfession.Piper, })
+		-- combat skills
+		elseif	t.Key == const.Keys.C then
+			bringHirelingsToParty({const.NPCProfession.WeaponsMaster, const.NPCProfession.ArmsMaster, const.NPCProfession.Squire, })
+		-- elemental skills
+		elseif	t.Key == const.Keys.E then
+			bringHirelingsToParty({const.NPCProfession.SpellMaster, const.NPCProfession.Mystic, const.NPCProfession.Apprentice, })
+		-- self skills
+		elseif	t.Key == const.Keys.S then
+			bringHirelingsToParty({const.NPCProfession.Prelate, const.NPCProfession.Initiate, const.NPCProfession.Acolyte, })
+		-- resistances
+		elseif	t.Key == const.Keys.R then
 			bringHirelingsToParty({const.NPCProfession.Enchanter, })
-		elseif t.Key == const.Keys["4"] then
+		-- learning
+		elseif	t.Key == const.Keys.L then
 			bringHirelingsToParty({const.NPCProfession.Instructor, const.NPCProfession.Teacher, })
-		elseif t.Key == const.Keys["5"] then
+		-- money
+		elseif	t.Key == const.Keys.M then
 			bringHirelingsToParty({const.NPCProfession.Banker, const.NPCProfession.Factor, })
-		elseif t.Key == const.Keys["6"] then
+		-- trading
+		elseif	t.Key == const.Keys.T then
 			bringHirelingsToParty({const.NPCProfession.Merchant, const.NPCProfession.Trader, })
-		elseif t.Key == const.Keys["7"] then
-			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, })
-		elseif t.Key == const.Keys["8"] then
+		-- land travel
+		elseif	t.Key == const.Keys["1"] then
+			bringHirelingsToParty({const.NPCProfession.Pathfinder, const.NPCProfession.Tracker, const.NPCProfession.Guide, })
+		-- horse travel
+		elseif	t.Key == const.Keys["2"] then
+			bringHirelingsToParty({const.NPCProfession.Horseman, })
+		-- sea travel
+		elseif	t.Key == const.Keys["3"] then
+			bringHirelingsToParty({const.NPCProfession.Navigator, const.NPCProfession.Sailor, })
+		-- utilities
+		elseif	t.Key == const.Keys.U then
 			bringHirelingsToParty({const.NPCProfession.WindMaster, const.NPCProfession.WaterMaster, })
+		-- disarm
+		elseif	t.Key == const.Keys.D then
+			bringHirelingsToParty({const.NPCProfession.Tinker, const.NPCProfession.Locksmith, const.NPCProfession.Burglar, })
+		else
+			handled = false
 		end
+		
+		if handled then
+			t.Key = 0
+		end
+		
 	end
 end
 
@@ -2735,7 +2704,6 @@ end
 mem.hookcall(0x004B7039, 1, 1, modifiedTempleHealingPrice)
 
 -- inn room price is scaled with party experience level
--- inn food price is scaled with party experience level and with the food quantity
 
 local function getInnRoomPrice()
 
@@ -2757,7 +2725,6 @@ local function getInnRoomPrice()
 	return innRoomPrice
 	
 end
-
 local function modifiedInnRoomPrice(d, def)
 
 	-- call original function
@@ -2774,6 +2741,8 @@ local function modifiedInnRoomPrice(d, def)
 	
 end
 mem.hookcall(0x004B8272, 0, 0, modifiedInnRoomPrice)
+
+-- inn food price is scaled with party experience level and with the food quantity
 
 local function modifiedInnFoodPrice(d, def)
 
@@ -2886,7 +2855,7 @@ local function modifiedDoDamageProjectile(d, def, playerPointer, damage, damageK
 		local defense = getDefenseInfo(player)
 		
 		if defense.shield.equipped then
-			damageMultiplier = damageMultiplier * math.pow(1 - shieldProjectileDamageReduction, defense.shield.level)
+			damageMultiplier = damageMultiplier * math.pow(1 - shieldProjectileDamageReduction / 100, defense.shield.level)
 		end
 		
 	end
@@ -3386,11 +3355,30 @@ end
 
 -- display combined skill
 
-local skillRankPosition = 150
-local skillEffectPosition = 196
+local skillLevelPositionShift = 46
+local skillEffectRankPosition = 173
 local skillEffectColor = {["r"] = 0xff, ["g"] = 0x00, ["b"] = 0xff, }
-local function displaySkillScreenSkill(d, def, dlg, font, x, y, color, text, arg_4, arg_5, arg_6)
+local function displaySkill(d, def, dlg, font, x, y, color, text, arg_4, arg_5, arg_6)
 
+	-- get current skill level position
+	
+	local markerBegin, markerEnd = Game.TextBuffer:find("\r")
+	
+	if markerEnd == nil then
+		return def(dlg, font, x, y, color, text, arg_4, arg_5, arg_6)
+	end
+	
+	local originalSkillLevelPosition = tonumber(Game.TextBuffer:sub(markerEnd, markerEnd + 3))
+	
+	-- compute new positions
+	
+	local skillLevelPosition = originalSkillLevelPosition + skillLevelPositionShift
+	local skillEffectLevelPosition = originalSkillLevelPosition
+	
+	-- shift skill level to the left
+	
+	Game.TextBuffer = Game.TextBuffer:gsub(string.format("\r%03d", originalSkillLevelPosition), string.format("\r%03d", skillLevelPosition))
+	
 	-- get player
 	
 	local player = Party.GetCurrentPlayer()
@@ -3412,7 +3400,7 @@ local function displaySkillScreenSkill(d, def, dlg, font, x, y, color, text, arg
 	
 	-- set skill effect text
 	
-	local skillRank
+	local skillRank = nil
 	local skillEffect
 	
 	if partyCumulativeSkills["regular"][displaySkillIndex] ~= nil then
@@ -3421,10 +3409,7 @@ local function displaySkillScreenSkill(d, def, dlg, font, x, y, color, text, arg
 		
 		local level, rank = SplitSkill(player:GetSkill(displaySkillIndex))
 		skillRank = rank
-		skillEffect =
-			(partyCumulativeSkills["regular"][displaySkillIndex]["type"] == 1 and level or level * skillEffectRankMultipliers[rank])
-			+
-			partyCumulativeSkills["regular"][displaySkillIndex]["fixed"]
+		skillEffect = partyCumulativeSkills["regular"][displaySkillIndex]["type"] == 1 and level or level * skillEffectRankMultipliers[rank]
 		
 	elseif partyCumulativeSkills["custom"][displaySkillIndex] ~= nil then
 	
@@ -3453,18 +3438,18 @@ local function displaySkillScreenSkill(d, def, dlg, font, x, y, color, text, arg
 		local skillEffectText = ""
 		
 		if skillRank ~= nil then
-			skillEffectText = skillEffectText .. string.format("\t%03d%s", skillRankPosition, rankLabels[skillRank])
+			skillEffectText = skillEffectText .. string.format("\t%03d%s", skillEffectRankPosition, rankLabels[skillRank])
 		end
 		
 		local skillEffectOutput = skillEffect >= 10000 and "++" or string.format("%2d", skillEffect)
-		skillEffectText = skillEffectText .. string.format("\r%03d%s", skillEffectPosition, skillEffectOutput)
+		skillEffectText = skillEffectText .. string.format("\r%03d%s", skillEffectLevelPosition, skillEffectOutput)
 		
 		skillEffectText = StrColor(skillEffectColor["r"],skillEffectColor["g"],skillEffectColor["b"]) .. skillEffectText .. StrColor(0,0,0)
 		
 		-- modify text buffer
 		
 		if skillEffectText ~= nil then
-			Game.TextBuffer = Game.TextBuffer:gsub("\r177", skillEffectText .. "\r177")
+			Game.TextBuffer = Game.TextBuffer .. skillEffectText
 		end
 		
 	end
@@ -3474,7 +3459,10 @@ local function displaySkillScreenSkill(d, def, dlg, font, x, y, color, text, arg
 	return def(dlg, font, x, y, color, text, arg_4, arg_5, arg_6)
 	
 end
-mem.hookcall(0x00419F44, 2, 7, displaySkillScreenSkill)
+mem.hookcall(0x00419957, 2, 7, displaySkill)
+mem.hookcall(0x00419B47, 2, 7, displaySkill)
+mem.hookcall(0x00419F44, 2, 7, displaySkill)
+mem.hookcall(0x00419D4B, 2, 7, displaySkill)
 
 -- disable party sliding indoor
 
@@ -3533,4 +3521,135 @@ mem.hookcall(0x0047F39B, 1, 1, monsterLoadFrames)
 -- double monsters speed limit
 
 mem.asmpatch(0x00470871, "mov     eax, 0x7D0", 0x5)
+
+-- disable not percieved doors
+
+local function getPartyPerceptionEffect()
+	local partyPerceptionEffect = 0
+	for playerIndex = 0, 3 do
+		local player = Party.PlayersArray[playerIndex]
+		local playerPerceptionEffect = player:GetPerceptionTotalSkill()
+		partyPerceptionEffect = math.max(partyPerceptionEffect, playerPerceptionEffect)
+	end
+	return partyPerceptionEffect
+end
+
+local function CanPercieve()
+	return mem.call(0x00497F4E, 1, 0x00ACCE38) == 1
+end
+
+local function OpenDoor(d, def, doorId, action)
+
+	-- not open action - process normally
+	
+	if action ~= 0 then
+		return def(doorId, action)
+	end
+
+	-- find door
+	
+	local door = nil
+	for doorIndex = 0, Map.Doors.high do
+		local doorIndexDoor = Map.Doors[doorIndex]
+		if doorIndexDoor.Id == doorId then
+			door = doorIndexDoor
+			break;
+		end
+	end
+	
+	if door == nil then
+		return def(doorId, action)
+	end
+	
+	-- not secret door - process normally
+	
+	local secret = false
+	for facetIdIndex = 0, door.FacetIds.high do
+		local facetId = door.FacetIds[facetIdIndex]
+		local facet = Map.GetFacet(facetId)
+		if facet.IsSecret then
+			secret = true
+			break
+		end
+	end
+	
+	if not secret then
+		return def(doorId, action)
+	end
+	
+	-- percieved door - process normally
+	
+	local requiredPerceptionEffect = Game.MapStats[Map.MapStatsIndex].Per * 2
+	local partyPerceptionEffect = getPartyPerceptionEffect()
+	
+	if partyPerceptionEffect >= requiredPerceptionEffect then
+		return def(doorId, action)
+	end
+	
+	-- disable not percieved door
+	
+	Game.ShowStatusText(string.format("Perception effect %d is required to open this door", requiredPerceptionEffect), 10)
+	
+	return
+	
+end
+mem.hookcall(0x00447E96, 2, 0, OpenDoor)
+
+-- disarm trap message
+
+local function failedDisarmRand()
+	local requiredDisarmTrapEffect = Game.MapStats[Map.MapStatsIndex].Lock * 2
+	Game.ShowStatusText(string.format("Disarm Trap effect %d is required to disarm this chest", requiredDisarmTrapEffect), 10)
+end
+mem.hookcall(0x00420587, 0, 0, failedDisarmRand)
+
+-- disallow using unidentified item
+
+local function equipItem(d, def)
+
+	-- default case
+	
+	if Mouse.Item.Number == 0 or Mouse.Item.Identified then
+		return def()
+	end
+	
+	-- unidentified item
+	
+	Party.GetCurrentPlayer():ShowFaceAnimation(const.FaceAnimation.CantEquip)
+	Game.ShowStatusText("Cannot use unidentified item", 10)
+	return
+	
+end
+mem.hookcall(0x00434AE9, 0, 0, equipItem)
+
+-- identify item cost scales with party experience
+
+local function identifyItemCost(d)
+	d.ecx = d.ecx * 10 * getPartyExperienceLevel()
+end
+mem.autohook(0x004B811A, identifyItemCost, 5)
+
+-- DisarmTrap GrandMaster does not give 100% success
+
+mem.asmpatch(0x004912CD, "cmp     eax, 5", 0x3)
+
+-- IdentifyItem GrandMaster does not give 100% success
+
+mem.asmpatch(0x0049112F, "cmp     eax, 5", 0x3)
+
+-- Perception GrandMaster does not give 100% success
+
+mem.asmpatch(0x00491276, "cmp     eax, 5", 0x3)
+
+-- RepairItem GrandMaster does not give 100% success
+
+mem.asmpatch(0x00491156, "test    bh, 2", 0x3)
+
+-- can hold dagger in left hand starting Novice
+
+mem.asmpatch(0x00469359, "test    eax, 0FFFFFFFFh", 0x5)
+
+-- can hold sword in left hand starting Expert
+
+mem.asmpatch(0x00469375, "cmp     eax, 2", 0x3)
 
