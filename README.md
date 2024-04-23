@@ -137,8 +137,10 @@ This allows greater flexibility in party composition. Lack of higher ranks in th
 
 Cumulative skill effect is the sum of each player skill effect. Skill effect formula is different depending on skill type.
 
-* Linear effect = level
-* Ranked effect = level \* rank multiplier (Novice = 1, Expert = 2, Master = 3, Grand = 5)
+```
+Linear effect = level
+Ranked effect = level \* rank multiplier (Novice = 1, Expert = 2, Master = 3, Grand = 5)
+```
 
 Alchemy uses linear effect. All other cumulative skills use ranked effect.
 
