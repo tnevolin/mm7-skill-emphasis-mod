@@ -13,12 +13,11 @@ https://github.com/GrayFace/Misc/releases/download/MM6Patch-2.4/MM6.Patch.v2.4.e
 
 ## Install this mod
 
-https://github.com/tnevolin/mm7-skill-emphasis-mod/tree/master/_releases
+[Releases](https://github.com/tnevolin/mm7-skill-emphasis-mod/releases)
 
 * Go to the release directory by the link above.
-* Download latest release.
-* Unpack it to a separate folder.
-* Copy everything into game directory overriding existing folders/files if needed.
+* Download latest release __mm7-skill-emphasis-mod.zip__ file.
+* Unpack the content into game directory overriding existing folders/files if needed.
 * Open mm7.ini in game directory and add following lines at the bottom
 <pre>
 [ExeMods]
