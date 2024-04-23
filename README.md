@@ -192,8 +192,8 @@ Cumulative. Effect is ranked.
 Cumulative. Effect is ranked.
 
 * GrandMaster no loger provides 100% success.
-* Chest locks are 1.5 times harder to pick.
-* Trap damage is 5 times more damageous.
+* Locks are 1.5 times harder to pick.
+* Traps are 5 times more damageous.
 
 ## Merchant
 
