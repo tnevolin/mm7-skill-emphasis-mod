@@ -228,7 +228,7 @@ Some skills are reshuffled between classes for better distribution of rare/often
 # Monsters
 
 * Monsters have more damage and more hit points to compensate for increased weapon damage and armor class.
-* Monsters have higher speed to catch up with the party and do not allow paryt running and shooting with impunity.
+* Monsters have higher speed to disallow running in circles and shooting with impunity.
 * Non flying and non shooting monsters now shoot arrows as a secondary attack. Now they are not helpless when cannot reach the party and shoot back. The importance of the shield spell increases.
 
 ## Engagement
