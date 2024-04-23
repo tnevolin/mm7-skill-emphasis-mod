@@ -8,413 +8,313 @@ Return RPG element into the game by emphasising skill importance.
 
 * Skill level should be the main source of character advancement.
 * Skill level should be more important than skill rank.
+* Combat and Magic skill advancement should be equally beneficial.
 * All skills should be somehow useful.
 * All buffs should be somehow useful.
 
-# Combat skills
+# Status
 
-## Weapon skills
+Playable. Testing skill balance now. Seems to be passable with hirelings, buffs, and alchemy: challenging enough without too much grinding.
 
-### Standard bonuses
+# Weapon
 
-These are: attack, recovery, damage, AC. You can check them in game description.
+Weapon skills provide more attack, recovery, damage, AC per level.
+
+All of the standard bonuses kick in right at the Novice rank. Higher ranks may increase them a little but not tremendously, making level advancement more imporant than rank.
+
+With new values weapon roughly increases damage rate by 10%-15% per level depending on the weapon type.
 
 ![Axe](https://github.com/tnevolin/mm7-skill-emphasis-mod/blob/main/_images/mm7_axe_description.png)
 
-All skills provide same bonuses as they do in vanilla. However, these bonuses are available immediately at Normal rank. Rank now controls how fast these bonuses progress with level instead of triggering them. Bonuses increment per level is much higher than in vanilla and varies based on their combat impact.
+## Staff
 
-### Additional bonuses
+Skill level grants a chance to deliver random elemental damage to the target. Elemental damage is proportional to the character corresponding magic skill level.
 
-* Staff adds small amount to all resistances for all party members. Bonus increases with rank and level.
-* Leather and Chain armor add to all resistance for wearer. Bonus increases with rank and level.
-* Plate wearer has a chance to cover other team member not wearing plate. Bonus increases with rank.
-* Shield wearer decreases all kind of physical and magical projectiles damage.
+This ecourages staff usage for spell caster, especially sorcerer. Monk does not benefit from this ability as they do not have elemental magic.
 
-## Bonus increment per level based on rank
+## Mace
 
-|bonus|normal|expert|master|
-|----|----:|----:|----:|
-|Attack|2|3|4|
-|Speed|4|5|6|
-|Damage|2|3|4|
-|Two-handed weapon Damage|3|3|3|
-|Armor Class from weapon|2|3|4|
-|Armor Class from shield|2|3|4|
-|Armor Class from leather|2|3|4|
-|Armor Class from chain|4|6|8|
-|Armor Class from plate|6|9|12|
-|Resistances from staff|0|1|2|
-|Resistances from leather|4|6|8|
-|Resistances from chain|2|3|4|
+Skill level grants a chance to paralize opponent.
 
-## Armor speed penalties
+## Dagger
 
-|armor type|normal|expert|master|
-|----|----:|----:|----:|
-|leather|10|5|0|
-|chain|20|10|0|
-|plate|30|15|0|
+Can be held in left hand at Novice.
 
-## Special abilities
+Single dagger is pretty weak. This helps dagger oriented character to make a difference from beginning. Also, can be easily used as an auxilliary weapon upon learning without skill points investment.
 
-### Staff special abilities
+## Sword
 
-Staff has a chance to shrink or feeblemind opponent. One of these effects is randomly chosen when Staff triggers the effect. These abilities are immediately available at normal skill rank.
+Can be held in left hand at Expert.
 
-* Chance to cause an effect = 10% + 2% \* skill level.
-* Effect duration = 5 minutes.
+Vanilla requires investing 27 skill points just to be able to dual wield with it. It feels a little bit excessive to accumulate that many skill points and not having immediate effect from it in the process.
 
-### Mace special abilities
+## Two handed weapon
 
-Mace has a chance to paralyze opponent. This ability is immediately available at novice rank.
+Skill level grants additional damage per level to two handed axe, spear, and sword.
 
-* Chance to cause an effect = 5% + 1% \* skill level.
-* Effect duration = 5 minutes.
+## Dual wielding
 
-### Dagger special abilities
+All bonuses from both weapons are added together thus making dual wielding the best offensive option.
 
-Dagger increases damage in close combat proportional to number of monsters attacking the party. This bonus grows with skill. The increment for a single additional monster is not big but when party is ambushed by 10 of them double daggers become as strong as the most powerful combo.
+## Armsmaster
 
-### Plate special abilities
+Armsmaster provides more attack, recovery, damage per level to match accelerated weapon skill progression.
 
-Knight and Paladin are seen as team champions rushing forward and covering weaker team members. Plate wearer has a chance to cover other team member not wearing a plate from physical melee attack by taking a hit for them. Such chance grows with Plate skill rank.
+## Unarmed
 
-|bonus|normal|expert|master|
-|----|----:|----:|----:|
-|Plate wearer chance to cover other team member|10%|20%|30%|
+Unarmed benefits partially, when it was not in vanilla.
 
-# Dual wielding
+# Armor
 
-Dual wielding rules are quite complicated in MM6. Player need to remember which weapon uses attack, speed, damage bonuses and which does not. Ugh. Moreover, some of the skill bonuses and enchantment effects may not work if you apply them to the weapon in wrong hand. Most of the time you are out of luck as you cannot possibly wield some weapons in off hand. This is certainly a waste of skills and enchantments. Why not make them all count? That makes it much easier to distribute skill points and fairer to both weapon skills.
+Armor skills provide more AC per level.
 
-## Dual wield mechanics modification
+## Shield
 
-All weapon bonuses are counted!!! Player can mix and match them as they see fit and get full benefit of weapon, skill, and enchantment bonuses from **each** weapon regardless of mix type. Weapons do not shadow each other abilities anymore.
+Shield decreases projectile damage to whole party.
 
-# Two-handed weapon specials
+## Leather
 
-## Extra damage per skill level
+Grants hefty elemental resistance to the wearer.
 
-Two handed weapon receives extra damage per skill level regardless or rank. This also adds some boost to two handed weapons those suck otherwise except maybe 2h axe which is about as good as axe-sword combo without this bonus. With this bonus it becomes a best offensive weapon in hands of non specialized melee fighter.
+## Chain
 
-# Class specialty
+Grants small elemental resistance to the wearer.
 
-MM6 classes are kind of indistinguishable in weapon skills. That's why Paladin is superior to Knight in any way as they can develop all the same weapon/armor skill but also have magic on top of that. I believe some class weapon specialization is in order to make them really represent their strengths.
+## Plate
 
-## Additional melee weapon damage bonus per --SKILL-- level for classes
+Plate wearer has a chance to cover other team members from physical attack. Chance increases with rank.
 
-|class|bonus|
+## Dodging
+
+Dodging benefits partially, when it was not in vanilla.
+
+# Magic
+
+Magic skill advancement is unchanged but some spells are modified. Subject for change with version.
+
+The idea was to make low level offensive spell useful at least until higher level version is available.
+
+|spell|fixed|level|
+|----|----:|----:|
+|Fire Bolt|3|1-4|
+|Fireball|4|1-4|
+|Fire Spike|0|1-40|
+|Lightning Bolt|8|1-8|
+|Implosion|12|1-12|
+|Ice Bolt|4|1-5|
+|Ice Blast|8|1-8|
+|Deadly Swarm|6|1-4|
+|Blades|9|1-9|
+|Rock Blast|4|1-6|
+|Mind Blast|5|1-3|
+|Harm|8|1-3|
+|Flying Fist|12|1-10|
+|Destroy Undead|12|1-12|
+|Toxic Cloud|15|1-10|
+|Shrapmetal|3|1-3|
+|Dragon Breath|0|1-15|
+|Souldrinker|25|1-2|
+
+# Miscelaneous
+
+## Team work
+
+Some skills used by a single person but beneficial to the whole party are cumulative. All party members work together and contribute to each other ability. Then the effective/total skill effect is shared among the party. Meaning all players are equally proficient with cumulative skill regardless of each other contribution, even if player itself does not possess this skill at all.
+
+This allows greater flexibility in party composition. Lack of higher ranks in these skills could be compensated by developing them in multiple characters at once.
+
+* Alchemy
+* Identify Item
+* Identify Monster
+* Repair Item
+* Stealing
+* Disarm Trap
+* Merchant
+* Perception
+* Learning (combined skill is divided by 4 to give each player an average)
+
+### Cumulative skill effect
+
+Cumulative skill effect is the sum of each player skill effect. Skill effect formula is different depending on skill type.
+
+* Linear effect = level
+* Ranked effect = level \* rank multiplier (Novice = 1, Expert = 2, Master = 3, Grand = 5)
+
+Alchemy uses linear effect. All other cumulative skills use ranked effect.
+
+### Cumulative skill rank
+
+As soon as ranked cumulative effect reaches that would be produced by a single rank character, all players effectively reach this rank.
+
+|effective rank|effect|
 |----|----:|
-|Knight|2|
-|Cavalier|3|
-|Champion|4|
-|Paladin|0|
-|Crusader|1|
-|Hero|2|
+|Novice|1|
+|Expert|8|
+|Master|27|
+|Grand|50|
 
-This is similar to MM7 arms-master bonus. Knight become an ultimate arms-master with Paladin following.
+## Alchemy
 
-## Additional ranged weapon attack and speed bonus per level for classes
+Cumulative. Effect is linear.
 
-Archer and all its promotions doubles skill based attack and speed bonuses to all ranged weapons (bow and blaster). This increases archer ranged damage rate by 2-4 times comparing to non archer classes. 
+## Identify Item
 
-# Weapon usage preference analysis
+Cumulative. Effect is ranked.
 
-## Singe wield vs. Dual wield vs. two-handed
+* GrandMaster no loger provides 100% success.
+* Players cannot use unidentified items.
+* Cost of identification in shops is high and scales with party experience.
 
-Single wield is inferior to any other wielding type as it was in vanilla. It is a waste to not use extra hand. If not for offense than for defense (shield) at least.
+## Identify Monster
 
-Dual wield in this mod combines attack and speed bonuses from both weapon giving dual wielding some boost. The inherent problem with wielding two different items in both hands (weapon-weapon or weapon-shield) is that skill points are split between two skills slowing down their progression comparing to a single type two-handed weapon that doesn't share skill point pool with anything else. Therefore, two-handed axe generally progresses about 1.4 time faster than any *different* weapons combo. That is 1.4 more accuracy \* 1.4 more speed \* 1.4 more damage. Two-handed weapon is always preferable for Archer as a single non specialized melee fighter class that can hold them. Magic classes (Cleric, Druid, Sorcerer) are not capable of wielding any significantly offensive 2h or dual combo.
+Cumulative. Effect is ranked.
 
-Specialized melee fighter classes (Paladin, Knight) receive damage bonus for **every** weapon held. As such Knight should definitely prefer axe-sword dual wielding for max offense benefit. He does not need to sacrifice weapon offensive power for additional protection as his plate and abundant HP protect him enough already. Paladin receives half of Knight damage bonus and, therefore, may opt for either dual or two-handed wielding - player's choice.
+* GrandMaster no loger provides 100% success.
+* Adds 1/4 of effect to all characters damage.
 
-Sword-sword and dagger-dagger combos are special case as they progress as fast as two-handed weapon due to same weapon type in both hands. However, since they both lack damage bonus, these combos have mediocre offense and do not compete with axe-sword, spear-sword options.
+## Repair Item
 
-## Dagger special ability
+Cumulative. Effect is ranked.
 
-Dagger damage grows with number of monster surrounding the party. With 10+ monsters around double daggers become best combo. May be useful to switch to it fighting groups in dungeons.
+* GrandMaster no loger provides 100% success.
 
-## Class weapon usage suggestions
+## Stealing
 
-### Knight
+Cumulative. Effect is ranked.
 
-![Knight damage rate progression by skill level](_images/weapon_knight.png)
+* GrandMaster no loger provides 100% success.
+* Adds effect to gold paid to the party (per transaction).
 
-Knight plays almost all combos pretty well until level 10 thanks to their hefty extra damage bonus. That also includes a famous sword-sword combo which is good for lazy players not interested in developing multiple weapon skills for Knight at the beginning of the game. The most offensive axe-sword combo overtakes all others past skill level 10 and continues improving at slightly higher rate from then on.
+## Disarm Trap
 
-Knight can opt to mace-sword combo sacrificing 20% damage rate for paralyzing ability.
+Cumulative. Effect is ranked.
 
-### Paladin
+* GrandMaster no loger provides 100% success.
+* Chest locks are 1.5 times harder to pick.
+* Trap damage is 5 times more damageous.
 
-![Paladin damage rate progression by skill level](_images/weapon_paladin.png)
+## Merchant
 
-Paladin can use 2h axe or axe-sword combo with about same combat effectiveness. Player's choice.
+Cumulative. Effect is ranked.
 
-Same is true for Paladin about mace paralyzing ability. Get it for 20% loss in damage rate. If you have both Knight and Paladin the latter is more suitable for mace as weaker class.
+* GrandMaster no loger provides 100% success.
 
-### Archer
+## Perception
 
-![Other classes damage rate progression by skill level](_images/weapon_nonmelee.png)
+Cumulative. Effect is ranked.
 
-Archer does not possess close combat bonuses yet it is still capable of using all weapons. Two-handed axe is a clear preference for them due to 2h damage bonus. Besides, since they cannot carry shield there is nothing else for them to do. Another possible option is spear-sword that is somewhate weaker on offense but higher on attack to penetrate heavy armor. Everything else is worse.
+* GrandMaster no loger provides 100% success.
+* Party cannot open not percieved door.
 
-### Cleric
+## Learning
 
-Mace for paralyzing. Shield for extra protection if you don't care about small recovery penalty. Shield also protects entire party from projectiles.
+Cumulative. Effect is ranked and then divided by 4.
 
-### Druid
+No much changes here except averaging learning across party. I don't see much game benefits in having party members different level.
 
-Mace/Dagger-Shield. Mace is probably better in long rung due to paralyzing while dagger is fast at the beginning. Double daggers are about twice as offensive comparing to a single dagger, of course. However, they still are not a match to any other decent combo. Better protect the weakling.
+# Classes
 
-### Sorcerer
+Some skills are reshuffled between classes for better distribution of rare/often used skills. Some Examples are below. See in-game descriptions for others.
 
-Staff. Best option due to its special effects benefiting whole party greatly. It may be wise to give staff to other magic class if there is no sorcerer in the party.
+* Knight cannot learn staff.
+* Knight cannot learn dodging.
+* Shield GM is given to Cleric instead of Knight.
+* Icreased number of Grands and Masters of different magic schools.
+* Classes able to use magic after promotion can now use it from the start.
+* Miscelaneous skills are redistributed a little.
 
-# Shared group skill advancement
+# Monsters
 
-Role playing assumes selecting character buid at start and develop it for greater specialization. It seems that both classes and various melee weapon and armor skills were introduced for that purpose. Classes play their role pretty well due to their distinctive difference in weapon/armor/magic combinations. Whereas, weapons and armor skills do not that much. Picking spear vs. mace, for example, does not differentiate character too much: fighter stays fighter and caster stays caster. Same for armors - they provide only quantitative difference but do not turn character into somebody else. These restrictions are more of annoyance when player finds a nice piece of a weapon/armor but cannot try it out because there are no character skillful enough to use it. This is especially highlighted by bow vs. blaster dilemma when finding blasters at the end of the game completely invalidates and wastes bow skill.
+* Monsters have more damage and more hit points to compensate for increased weapon damage and armor class.
+* Monsters have higher speed to catch up with the party and do not allow paryt running and shooting with impunity.
+* Non flying and non shooting monsters now shoot arrows as a secondary attack. Now they are not helpless when cannot reach the party and shoot back. The importance of the shield spell increases.
 
-Not anymore in this mod. All skills within each weapon type group (melee weapons, ranged weapons, armors) are advanced simultaneously whenever any one in the group is. That allows swapping items within the group without regret of wasting skill points player worked so hard for.
+## Engagement
 
-A small correction to wielding two different weapons is needed due to this change. In vanilla different dual weapons progress about 1.4 times slower as they both require skill point investment. Therefore, this mod does similar correction reducing displayed weapon skill levels to simulate natural vanilla progression. This is for *different* dual weapons only. A little bit not visual for player but I hope this will be a minor inconvenience.
+Monsters are engaged whenever nearby monster is engaged. Thus attacking player with the whole mob at once. Extreme fun!
 
-## Shared miscelaneous skills advancement
+It is still possible to run away from not so fast moving monsters since they may be slowed down by terrain or sideway movement.
 
-Some "singe master benefits whole party" miscelaneous skills are also shared now. That means that anyone can contribute to them but they will advance simultaneously for all party members. It reduces infinite passing broken items back and forth for repair or identification or selecting right disarm character, etc.
+# Other
 
-# Spells
+## Temple, Tavern, Food
 
-## Buffs and healing spells
+Temple healing price is proportional to healed HP+SP and grows with party experience.
 
-All stat boost spells affect whole party at novice level.
+Tavern room price is about a quarter of temple price to heal everybody. Thus making tavern rest cheaper than temple healing in case of severe damage. However, sleeping cannot restore many ailments.
 
-## Damaging spells
+Food price is proportional to the pack size and also grows with party experience.
 
-All spells always hit. Making just a few spells to hit depending on skill level is too fine grained and hard to visualize mechanics that is absolutely not needed.
+## Books
 
-Low level spells fixed damage is increased by about 10. That allows them to be immediately useful at the time of purchase. Also gives player incentive to actually hunt for them in the stores. They naturally will be replaced by more powerful spells as player acquire them. More powerful spells are less mana effective, though. That may be an important consideration in this mod where healing is not that cheap.
+Book values grow speeper.
 
-Higher level spells fixed damage value is mostly reduced to zero. Their per level damage is somewhat increased to keep up with weapon progression.
+## Hirelings
 
-Restricted and difficult to aim/use spells get extra damage due to inconvenience. That may give an incentive to use them when conditions are right. These are spells like: Destroy Undead (only against undead), Death Blossom (very difficult to aim), etc.
+Some corrections in Hireling prices.
 
-## Modified spell values
+| profession | cost |
+|----|----:|
+| Chaplain | 200 |
+| Piper | 1000 |
+| Monk | 1000 |
+| ArmsMaster | 2000 |
+| WeaponsMaster | 3000 |
+| Squire | 4000 |
+| Duper | 400 |
+| Trader | 500 |
+| Merchant | 1000 |
+| Herbalist | 200 |
+| Apothecary | 400 |
+| Hunter | 100 |
+| Sage | 200 |
+| Scholar | 300 |
 
-|spell|fixed|per level|
-|----|----:|----:|
-|Protection from ...||3, 4, 5|
-|All stat boosts|10|5, 5, 5|
-|Stone Skin|20|4|
-|Bless|5|1|
-|Heroism|5|1|
-|Healing Touch|3-7, 6-14, 15-35||
-|First Aid|5, 10, 25||
-|Cure Wounds||5|
-|Power Cure||5|
-|Fire Bolt|10|1-4|
-|Ring Of Fire|10|1-4|
-|Fire Blast|4|1-4|
-|Meteor Shower||1-4|
-|Inferno||1-5|
-|Incinerate||1-20|
-|Sparks|5|1-1|
-|Lightning Bolt|10|1-8|
-|Implosion|10|1-12|
-|Starburst||1-8|
-|Poison Spray|7|1-2|
-|Ice Bolt|10|1-7|
-|Acid Burst|10|1-10|
-|Ice Blast|10|1-10|
-|Deadly Swarm|15|1-3|
-|Blades|10|1-5|
-|Death Blossom||1-15|
-|Mind Blast|15|1-2|
-|Psychic Shock|20|1-15|
-|Harm|20|1-2|
-|Flying Fist|30|1-10|
-|Destroy Undead||1-25|
-|Prismatic Light||1-8|
-|Sun Ray||1-30|
-|Shrapmetal|8|1-8|
-
-# Monsters improvement
-
-Increased weapon bonuses makes easy vanilla monster fighting even easier. Monsters are beefed up to compensate for this. Monsters' damage to player is doubled. Monsters' HP is doubled. Monsters' AC is doubled and slightly adjusted to grow more steadily. Monsters' level is slightly adjusted to grow more steadily. Monsters' speed is significantly increased so they can catch up to player and reduce the "run bypass" tactics to the minimum. Also to let not shooting monsters to quicly close up to player for melee engagement.
-
-Increased monster toughness is compensated by doubling received experience as well as increasing learing multipliers.
-
-# Hirelings
-
-I've changed the probability of different professions appearence based on nice analysis [here](https://gamefaqs.gamespot.com/pc/41610-might-and-magic-vi-the-mandate-of-heaven/faqs/24566).
-
-Some useless professions should not appear at all. Some profession cost are adjusted.
-
-| profession | random chance | cost |
-|----|----:|----:|
-| Smith | 10 | 100 |
-| Armorer | 10 | 100 |
-| Alchemist | 0 | 100 |
-| Scholar | 10 | 500 |
-| Guide | 0 | 100 |
-| Tracker | 10 | 200 |
-| Pathfinder | 10 | 300 |
-| Sailor | 10 | 100 |
-| Navigator | 10 | 200 |
-| Healer | 10 | 500 |
-| Expert Healer | 10 | 2000 |
-| Master Healer | 10 | 5000 |
-| Teacher | 10 | 300 |
-| Instructor | 10 | 700 |
-| Arms Master | 10 | 1000 |
-| Weapons Master | 10 | 1500 |
-| Apprentice | 10 | 200 |
-| Mystic | 10 | 1000 |
-| Spell Master | 10 | 2000 |
-| Trader | 10 | 100 |
-| Merchant | 10 | 200 |
-| Scout | 10 | 300 |
-| Counselor | 0 | 200 |
-| Barrister | 0 | 300 |
-| Tinker | 10 | 200 |
-| Locksmith | 10 | 300 |
-| Fool | 10 | 100 |
-| Chimney Sweep | 10 | 200 |
-| Porter | 10 | 100 |
-| Quarter Master | 0 | 200 |
-| Factor | 10 | 500 |
-| Banker | 10 | 1000 |
-| Cook | 0 | 300 |
-| Chef | 10 | 400 |
-| Horseman | 10 | 100 |
-| Bard | 10 | 1000 |
-| Enchanter | 10 | 1000 |
-| Cartographer | 10 | 200 |
-| Wind Master | 10 | 2000 |
-| Water Master | 10 | 1000 |
-| Gate Master | 10 | 2000 |
-| Acolyte | 10 | 200 |
-| Piper | 10 | 300 |
-| Explorer | 10 | 100 |
-| Pirate | 10 | 500 |
-| Squire | 10 | 2000 |
-| Psychic | 10 | 400 |
-| Gypsy | 10 | 100 |
-| Negotiator | 0 | 500 |
-| Duper | 10 | 200 |
-| Burglar | 10 | 2000 |
-| Peasant | 0 | 1 |
-| Serf | 0 | 1 |
-| Tailor | 0 | 5 |
-| Laborer | 0 | 1 |
-| Farmer | 0 | 1 |
-| Cooper | 0 | 5 |
-| Potter | 0 | 2 |
-| Weaver | 0 | 2 |
-| Cobbler | 0 | 3 |
-| Ditch Digger | 0 | 1 |
-| Miller | 0 | 2 |
-| Carpenter | 10 | 5 |
-| Stone Cutter | 10 | 4 |
-| Jester | 0 | 10 |
-| Trapper | 0 | 5 |
-| Beggar | 0 | 1 |
-| Rustler | 0 | 3 |
-| Hunter | 0 | 5 |
-| Scribe | 0 | 10 |
-| Missionary | 0 | 10 |
-| Clerk | 0 | 8 |
-| Guard | 0 | 10 |
-| Follower of Baa | 0 | 1 |
-| Noble | 0 | 100 |
-| Gambler | 0 | 10 |
-
-# Learning skill bonus multiplier
-
-* Novice triples bonus.
-* Expert quadruples bonus.
-* Master quintuples bonus.
-
-As a result, learning skill is more valuable now and is worth to upgrading to master level 10-12. Anything above that is a waste of skill points.
-
-# Missiles auto aim in flight
-
-Missiles (arrows and spells) constantly 3D auto aim their initial target while in flight. Both party and monster cannot dodge missiles by moving sideways/up/down as long as there are no obstacles between missile and target. Running or flying past bunch of shooters in real-time mode is not safe anymore. Nor is flying up/down in turn based mode. It is still possible to avoid the missile by hiding behind an obstacle as before.
-
-This invalidate the strategy of running past shooting outdoor monsters to some important location. Now these previously largely ignored outdoor troops actually guard their territory. One need to kill them all to be able to pass safely.
-
-Later addition. Dargon towers shoot homing fireballs now. They are faster than flight speed. Therefore now it is really dangerous to fly without switching them off first.
-
-# Bringing needed hirelings to party
-
-This is a convenience fix. I am tired to reload game hundreds times just to find needed hireling. Time waste. I have implemented a keyboard shortcut that brings available outside walking peasants to the party and set their professions. I've added just two now but can do more if people need more shortcuts.
-
-* Works outside only and brings outside peasants only if they are available.
-* Hiring peasant NPC removes them from the map so you may run out of them on a particular map.
-
-| shortcut | hirelings | comment |
-|----|----|----|
-| Alt+1 | Weapons Master, Squire | physical offense and defense
-| Alt+2 | Spell Master, Mystic | magical offense and buffs
-| Alt+3 | Enchanter | magical defense
-| Alt+4 | Instructor, Teacher | experience
-| Alt+5 | Banker, Factor | money collected
-| Alt+6 | Merchant, Trader | trading selling/buying
-| Alt+7 | Pathfinder, Tracker | travel speed = food reduction in transit
-| Alt+8 | WindMaster, WaterMaster | reaching to places
-
-# Might and Magic: Skill mphasis mod
-
-|skill		|Kn			|Mo			|Th			|Pa			|Ar			|Ra			|Cl			|Dr			|So			|
-|----			|:----:	|:----:	|:----:	|:----:	|:----:	|:----:	|:----:	|:----:	|:----:	|
-|Staff		|-			|G			|-			|-			|N			|N			|N			|N			|N			|
-|Sword		|G			|E			|M			|M			|N			|N			|N			|N			|N			|
-|Dagger		|E			|E			|G			|E			|N			|N			|N			|N			|N			|
-|Axe			|M			|-			|-			|E			|N			|N			|N			|N			|N			|
-|Spear		|G			|E			|-			|E			|N			|N			|N			|N			|N			|
-|Mace			|M			|-			|E			|G			|N			|N			|N			|N			|N			|
-|Unarmed	|-			|G			|E			|B			|N			|N			|N			|N			|N			|
-|Bow			|E			|B			|E			|E			|N			|N			|N			|N			|N			|
-|Shield		|E			|-			|N			|E			|N			|N			|N			|N			|N			|
-|Leather	|E			|M			|G			|E			|N			|N			|N			|N			|N			|
-|Chain		|M			|-			|E			|E			|N			|N			|N			|N			|N			|
-|Plate		|G			|-			|-			|M			|N			|N			|N			|N			|N			|
-|Dodging	|-			|G			|M			|N			|N			|N			|N			|N			|N			|
-
-# Mechanics modification
-
-# Recovery
-
-## Recovery caps
-
-Melee recovery cap is reduced to 10. This still seem to be reasonable cap for end game. Yet it is almost never reachable anyway.
-
-I didn't change ranged recovery cap but it seems that is does not exist!
-
-## Computation mechanics
-
-Intuitive player assumption is that bigger stat value is better, the bonus is positive, penalty is negative. MM recovery mechanics uses an inverse scale which makes it a little difficult to grasp at first. This also creates inherent flaw when attack rate growths faster with skill progression and then suddenly stops at easily reachable cap. From then on it is a complete waste to invest into recovery any more. All speed increasing weapons suddenly become ineffective to develop any further.
-
-This mod internally introduces a notion of attack rate which is a reciprocal to recovery time. All recovery time bonuses now increase the attack rate and it is computed same way as any other positive game stats. Meaning adding 100 attack rate bonus on top of initial 100 attack rate value makes player attack twice as fast which corresponds to 50 recovery. With this approach reaching recovery time cap is still possible but much harder. See computation example below.
-
-Keep in mind that even though computation mechanics changed the attack rate value is still converted to recovery for the purpose of UI display and in game text/help and combat computations.
-
-## Computation example
-
-### Vanilla
-
-<pre>
-Dagger    =  60 base recovery
-500 speed =  30 recovery bonus
-haste     =  25 recovery bonus
-
-result		=   5 recovery which is actually capped at 30
-</pre>
-
-### This mod
-
-<pre>
-Total recovery bonus from above example: 40 (dagger) + 30 (speed) + 25 (haste) = 95
-Resulting attack rate:                   100 + 95 = 195
-Converting back to recovery:             100 * (100 / 195) = 51, cap is not reached
-</pre>
+# Mechanics
+
+## Attack
+
+Attack formula is modified a bit to emphasise difference between Attack and AC, rather than their ratio as in vanilla. Character or monster has 50% chance to hit when their attack equals to opponent AC, 75% if their attack is ~50 more and 25% if attack ~50 less.
+
+## Recovery
+
+Recovery reduction is treated as a speed increase. Adding 100 recovery bonus now allows character attacking twice as fast (recovery = 50) instead of dropping it to zero.
+
+## Homing missiles
+
+Missiles (arrows and spells) constantly 3D auto aim their initial target while in flight. Both party and monster cannot dodge missiles by moving sideways/vertically. Obstacles still stop the projectile.
+
+## Sliding on slopes
+
+Party and monster sliding on slopes is reduced to some extent. The "king of the hill" tactics is no longer 100% effective.
+
+# Quality of life
+
+## Damage rate
+
+Damage rate is displayed in purple at the stats screen. This is a computed equipped weapon damage rate assuming opponent AC = 50. Excellent for different weapon set comparison.
+
+## Cumulative skill effect
+
+Cumulative skill effect is displayed in purple at the skills screen. This is the result of what game internally uses. No need to use calculator to add them all up.
+
+## Bringing needed hirelings to party
+
+This is a convenience fix. I am tired to reload game hundreds times just to find needed hireling. Time waste. I have implemented a keyboard shortcut that brings available outside walking peasants to the party and set their professions. Works outdoor only.
+
+| shortcut | hirelings |
+|----|----|
+| Alt+B (buffs) | Chaplain, Piper |
+| Alt+C (combat) | WeaponsMaster, ArmsMaster, Squire |
+| Alt+E (elemental) | SpellMaster, Mystic, Apprentice |
+| Alt+S (self) | Prelate, Initiate, Acolyte |
+| Alt+R (resistance) | Enchanter |
+| Alt+L (learning) | Instructor, Teacher |
+| Alt+M (money) | Banker, Factor |
+| Alt+T (trading) | Merchant, Trader |
+| Alt+1 (land travel) | Pathfinder, Tracker, Guide |
+| Alt+1 (horse travel) | Horseman |
+| Alt+1 (sea travel) | Navigator, Sailor |
+| Alt+U (utility) | WindMaster, WaterMaster |
+| Alt+D (disarming) | Tinker, Locksmith, Burglar |
 
