@@ -6,7 +6,7 @@ This mod requires GrayFace patch.
 
 ## Install GrayFace patch
 
-https://github.com/GrayFace/Misc/releases/download/MM6Patch-2.4/MM6.Patch.v2.4.exe
+https://github.com/GrayFace/Misc/releases/download/MM7Patch-2.5.7/MM7.Patch.v2.5.7.exe
 
 * Download patch by link above.
 * Run it and follow instructions.
